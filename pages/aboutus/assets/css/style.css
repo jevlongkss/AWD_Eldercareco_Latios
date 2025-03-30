@@ -1,12 +1,13 @@
 @import url("https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css");
-@import url("https://fonts.googleapis.com/css?family=Inter:400,500,700,600");
+@import url("https://fonts.googleapis.com/css?family=Inter:400,500,600,700");
+
 * {
   -webkit-font-smoothing: antialiased;
   box-sizing: border-box;
 }
-html,
-body {
-  margin: 0px;
+
+html, body {
+  margin: 0;
   height: 100%;
 }
 
@@ -14,6 +15,7 @@ button:focus-visible {
   outline: 2px solid #4a90e2 !important;
   outline: -webkit-focus-ring-color auto 5px !important;
 }
+
 a {
   text-decoration: none;
 }
@@ -55,49 +57,6 @@ img {
     scroll-behavior: auto !important;
   }
 }
-.our-mission{
-  background-color: #8c69f44e;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.our-mission img{
-  width: 20rem;
-  height: auto;
-  padding-right: 4rem;
-}
-
-.our-mission p{
-  width: 50vw;
-  padding-left: 3rem;
-}
-
-.our-mission h2{
-  max-width: 100%;
-  font-size: 3rem;
-  color: #8c69f4;
-  padding-left: 3rem;
-}
-
-.vission{
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.vission .vission-image {
-  width: 105rem;
-  height: auto;
-  padding-right: 4rem;
-}
-body {
-  font-family: "Inter", Helvetica, Arial, sans-serif;
-  line-height: 1.6;
-  color: #000000;
-}
 
 header {
   position: fixed;
@@ -108,7 +67,7 @@ header {
 
 .top-bar {
   background-color: #ffffff;
-  height: 2.5rem;
+  height: 2.8rem;
   text-align: left;
   display: flex;
   justify-content: space-between;
@@ -120,6 +79,37 @@ header {
   padding-left: 20px;
   color: #8c69f4;
   font-size: 18px;
+}
+
+.cta-buttons {
+  display: flex;
+  gap: 0;
+}
+
+.cta-buttons a {
+  padding: 10px 20px;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 0;
+}
+
+.contact-btn {
+  background-color: rgba(140, 105, 244, 0.73);
+  color: #ffffff;
+}
+
+.location-btn {
+  background-color: #8c69f4;
+  color: #ffffff;
+}
+
+.browse-plans-btn {
+  padding: 10px 20px;
+  background-color: #8c69f4;
+  color: #ffffff;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
 }
 
 nav {
@@ -157,29 +147,6 @@ nav ul li a[aria-current="page"] {
   color: #8c69f4;
 }
 
-.cta-buttons a,
-.browse-plans-btn {
-  padding: 10px 20px;
-  text-decoration: none;
-  font-weight: bold;
-}
-
-.contact-btn {
-  background-color: rgba(140, 105, 244, 0.73);
-  color: #ffffff;
-}
-
-.location-btn {
-  background-color: #8c69f4;
-  color: #ffffff;
-}
-
-.browse-plans-btn {
-  background-color: #8c69f4;
-  color: #ffffff;
-  border-radius: 5px;
-}
-
 main {
   padding-top: 150px;
 }
@@ -215,13 +182,52 @@ h2 {
   margin-bottom: 20px;
 }
 
+.our-mission {
+  background-color: #8c69f44e;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.our-mission img {
+  width: 20rem;
+  height: auto;
+  padding-right: 4rem;
+}
+
+.our-mission p {
+  width: 50vw;
+  padding-left: 3rem;
+}
+
+.our-mission h2 {
+  max-width: 100%;
+  font-size: 3rem;
+  color: #8c69f4;
+  padding-left: 3rem;
+}
+
+.vission {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.vission .vission-image {
+  width: 105rem;
+  height: auto;
+  padding-right: 4rem;
+}
+
 .mission-image,
 .team-photo {
   max-width: 100%;
   height: auto;
   margin-top: 20px;
 }
-  
+
 .team-photo h3 {
   text-align: center;
   font-size: 1.2rem;
@@ -282,7 +288,6 @@ h2 {
   position: relative;
   top: 130px;
   box-shadow: #ffffff 2px 2px 0px;
-
 }
 
 .newsletter form {
@@ -292,7 +297,7 @@ h2 {
   justify-content: center;
   align-items: center;
   margin-top: 20px;
-  padding-bottom: 15px
+  padding-bottom: 15px;
 }
 
 .newsletter input[type="email"] {
@@ -358,32 +363,216 @@ footer {
   background-color: white;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1200px) {
+  .container {
+    max-width: 100%;
+    padding: 0 15px;
+  }
+}
+
+@media (max-width: 992px) {
   nav {
+    flex-wrap: wrap;
+    gap: 15px;
+  }
+  
+  nav ul {
+    order: 1;
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .our-mission, .vission {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .our-mission img, 
+  .vission .vission-image {
+    padding-right: 0;
+    margin-bottom: 30px;
+  }
+  
+  .our-mission p,
+  .our-mission h2 {
+    width: 100%;
+    padding-left: 0;
+  }
+  
+  .team {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .team ul {
+    padding-top: 20px;
+    text-align: center;
+  }
+  
+  .team li {
+    padding-left: 0;
+  }
+  
+  .newsletter-content {
+    flex-direction: column;
+    text-align: center;
+    top: 80px;
+  }
+  
+  .newsletter form {
+    width: 100%;
+    margin-top: 15px;
+  }
+}
+
+@media (max-width: 768px) {
+  main {
+    padding-top: 80px;
+  }
+  
+  header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    transition: transform 0.3s ease-in-out;
+    z-index: 1000;
+  }
+  
+  .header-hidden {
+    transform: translateY(-100%);
+  }
+  
+  .top-bar {
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .top-bar-hidden {
+    transform: translateY(-100%);
+  }
+  
+  .top-bar {
+    height: auto;
+    padding: 8px 15px;
     flex-direction: column;
     align-items: flex-start;
+    gap: 8px;
   }
-
+  
+  .top-bar p {
+    padding-left: 0;
+    font-size: 16px;
+  }
+  
+  nav {
+    padding: 10px 15px;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
   nav ul {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  nav ul li {
+    margin-right: 0;
+  }
+  
+  .browse-plans-btn {
+    align-self: center;
+  }
+  
+  .hero {
+    padding: 60px 15px;
+    margin-top: 0;
+  }
+  
+  .hero h1 {
+    font-size: 2.5rem;
+    line-height: 1.2;
+  }
+  
+  .hero p {
+    font-size: 1.1rem;
+  }
+  
+  .our-mission, 
+  .vission {
+    padding: 30px 15px;
+  }
+  
+  .our-mission h2 {
+    font-size: 2rem;
+  }
+  
+  .company-info article {
+    padding-left: 0;
+  }
+  
+  .team-photo {
+    order: -1;
+    margin-bottom: 20px;
+  }
+  
+  .newsletter {
+    padding: 30px 15px;
+    margin-top: 0;
+  }
+  
+  .newsletter-content {
+    padding: 20px;
+    top: 0;
+  }
+  
+  .newsletter form {
+    flex-direction: column;
+    height: auto;
+  }
+  
+  .newsletter input[type="email"] {
+    width: 100%;
+    border-radius: 5px;
+    margin-bottom: 10px;
+  }
+  
+  .newsletter button {
+    width: 100%;
+    border-radius: 5px;
+  }
+  
+  footer {
+    padding: 50px 15px 0;
+  }
+  
+  .footer-content {
+    flex-direction: column;
+    gap: 30px;
+  }
+  
+  .footer-section {
+    margin-right: 0;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero h1 {
+    font-size: 2rem;
+  }
+  
+  .cta-buttons {
     flex-direction: column;
     width: 100%;
   }
-
-  nav ul li {
-    margin-right: 0;
-    margin-bottom: 10px;
+  
+  .contact-btn,
+  .location-btn {
+    width: 100%;
+    border-radius: 5px !important;
   }
-
-  .cta-buttons,
-  .browse-plans-btn {
-    margin-top: 20px;
-  }
-
-  .footer-content {
-    flex-direction: column;
-  }
-
-  .footer-section {
-    margin-right: 0;
+  
+  .contact-btn {
+    margin-bottom: 5px;
   }
 }
