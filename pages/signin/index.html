@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create an Account - ElderCare Co.</title>
+  <link rel="stylesheet" href="./assets/css/style.css">
+</head>
+<body>
+  <div class="account-creation">
+    <div class="image-section">
+      <img src="./assets/img/signin_image.png" alt="Happy elderly couple">
+    </div>
+    <div class="form-section">
+      <div class="logo-container">
+        <img src="./assets/img/logo.png" alt="ElderCare Co. Logo" class="logo">
+      </div>
+      <div class="form-container">
+        <h1>Create an Account</h1>
+        <p class="subtitle">Join ElderCare Co. and ensure the best care</p>
+        <form>
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" placeholder="Ex. John Jones" required>
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" placeholder="sample@sample.com" required>
+          </div>
+
+          <div class="form-group">
+            <label for="password">Password (6 or more characters)</label>
+            <input type="password" id="password" placeholder="••••••••" required minlength="6">
+          </div>
+
+          <div class="form-group">
+            <label for="confirm-password">Confirm Password</label>
+            <input type="password" id="confirm-password" placeholder="••••••••" required minlength="6">
+          </div>
+
+          <div class="form-options">
+            <div class="checkbox-group">
+              <input type="checkbox" id="remember-me">
+              <label for="remember-me">Remember Me</label>
+            </div>
+            <a href="#" class="forgot-password">Forgot Password?</a>
+          </div>
+          <button type="submit" class="submit-btn">Sign Up</button>
+          <div class="login-prompt">
+            <p>Already have an account? <a href="#">Log in here</a></p>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
