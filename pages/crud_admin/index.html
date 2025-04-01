@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Care Service - CRUD-ADMIN</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="./assets/css/style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <!-- Top Bar -->
+        <div class="top-bar">
+            <p>Call +63 2 1234 5678</p>
+            <div class="cta-buttons">
+                <a href="#" class="contact-btn">Contact Us</a>
+                <a href="#" class="location-btn">Find a Location</a>
+            </div>
+        </div>
+
+        <!-- Main Navigation -->
+        <nav>
+            <img class="logo" src="./assets/img/logo2.png" alt="Eldercare Co. Logo">
+            <ul class="nav-menu">
+                <li><a href="../../index.html">Home</a></li>
+                <li><a href="../aboutus/index.html">About Us</a></li>
+                <li><a href="#" aria-current="page">Care Service</a></li>
+                <li><a href="#">Personal Records</a></li>
+            </ul>
+            <a href="#" class="browse-plans-btn">Login</a>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <div class="main-container">
+        <div class="content-wrapper">
+            <!-- Sidebar -->
+            <div class="crud-sidebar">
+                <h4 class="crud-title">CRUD OPERATIONS</h4>
+                <div class="admin-profile">
+                    <img src="./assets/img/admin-avatar.png" alt="Admin">
+                    <h5>ADMIN</h5>
+                </div>
+            </div>
+
+            <!-- Content Area -->
+            <div class="content-area">
+                <div class="content-header">
+                    <h2>Appointment List</h2>
+                    <div class="header-actions">
+                        <div class="header-top">
+                            <div class="search-bar">
+                                <input type="text" placeholder="Search..." id="searchInput">
+                                <i class="fas fa-search"></i>
+                            </div>
+                            <i class="fas fa-bell notification-icon"></i>
+                        </div>
+                        <button class="add-client-btn" id="addNewClient">
+                            ADD NEW CLIENT
+                        </button>
+                    </div>
+                </div>
+
+                <div class="table-container">
+                    <table class="appointment-table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th>Contact Pref</th>
+                                <th>Location</th>
+                                <th>Date of Appointment</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="appointmentTableBody">
+                            <!-- Table content will be dynamically populated -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add/Edit Modal -->
+    <div class="modal" id="appointmentModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalTitle">Add New Client</h5>
+                    <button type="button" class="close-button" data-bs-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <form id="appointmentForm">
+                        <div class="form-group">
+                            <label class="form-label">Name</label>
+                            <input type="text" class="form-control" id="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Email</label>
+                            <input type="email" class="form-control" id="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Phone</label>
+                            <input type="tel" class="form-control" id="phone" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Contact Preference</label>
+                            <select class="form-control" id="contactPref" required>
+                                <option value="Email">Email</option>
+                                <option value="Phone">Phone</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Location</label>
+                            <input type="text" class="form-control" id="location" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Date of Appointment</label>
+                            <input type="date" class="form-control" id="dateOfAppointment" required>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="saveAppointment">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="./assets/js/script.js"></script>
+</body>
+</html>
