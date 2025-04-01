@@ -14,28 +14,43 @@
 </head>
 <body>
 
-    <header>
-        <div class="top-bar">
-            <p>Call +63 2 1234 5678</p>
-            <div>
-                <a href="#">Contact Us</a>
-                <a href="#">Find a Location</a>
-            </div>
-        </div>
-        <nav>
-            <h1 style="color: #6E57E0; font-family: cursive;">ElderCare Co.</h1>
-            <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">About Us</a></li>
-                <li><a href="#">Care Service</a></li>
-                <li><a href="#">Healthcare Professionals</a></li>
-            </ul>
-            <a href="#" class="btn-primary">Browse plans</a>
-        </nav>
-    </header>
+<!-- Top Bar -->
+<div class="top-bar">
+    <span>Call +63 2 1234 5678</span>
+    <div class="contact-buttons">
+      <a href="#" class="contact">Contact Us</a>
+      <a href="#" class="location">Find a Location</a>
+    </div>
+  </div>
 
-    <section class="hero">
-        <div class="hero-content">
+  <!-- Navbar -->
+  <nav class="navbar">
+    <!-- Logo -->
+    <div class="logo">
+      <img src="/assets/img/logo.png" alt="Logo">
+    </div>
+
+    <!-- Links -->
+    <div class="nav-links">
+      <a href="#">Home</a>
+      <a href="#">About Us</a>
+      <div class="dropdown">
+        <a href="#">Care Service ▼</a>
+        <div class="dropdown-menu">
+          <a href="#">Service 1</a>
+          <a href="#">Service 2</a>
+          <a href="#">Service 3</a>
+        </div>
+      </div>
+      <a href="#">Healthcare Professionals</a>
+    </div>
+
+    <!-- Browse Plans Button -->
+    <a href="#" class="browse-plans">Browse plans</a>
+  </nav>
+
+    <section class="hero1">
+        <div class="hero-content1">
             <h1>Compassionate care, <br>for those who matter most.</h1>
             <p>We provide compassionate, personalized care for seniors, helping them enjoy their independence and comfortability at home.</p>
             <a href="#" class="btn-primary">Browse plans</a>
@@ -61,81 +76,122 @@
     </section>
 
     <section class="service-section">
-        <h2>Wide Variety of Offers for elders</h2>
-        <p>ElderCare Co. offers personalized care, companionship, medication reminders, and daily assistance to help seniors live comfortably and independently at home.</p>
-        <div class="service-cards">
-            <div class="service-card">
-                <img src="#" alt="Service 1">
-            </div>
-            <div class="service-card">
-                <img src="#" alt="Service 2">
-            </div>
-            <div class="service-card">
-                <img src="#" alt="Service 3">
-            </div>
-        </div>
-        <div class="stats">
-            <h3>100+</h3>
-            <p>Elderly Clients</p>
-            <h3>50+</h3>
-            <p>Team members</p>
-            <h3>500+</h3>
-            <p>Positive reviews</p>
-            <h3>50+</h3>
-            <p>Served</p>
-        </div>
-    </section>
+      <h1>Our Service</h1>
+      <h2>Wide Variety of Offers for Elders</h2>
+      <p>ElderCare Co. offers personalized care, companionship, medication reminders, and daily assistance to help seniors live comfortably and independently at home.</p>
+      <div class="service-cards">
+          <div class="service-card">
+              <img src="./assets/img/Service1.png" alt="Service 1">
+          </div>
+          <div class="service-card">
+              <img src="/assets/img/Service2.png" alt="Service 2">
+          </div>
+          <div class="service-card">
+              <img src="/assets/img/Service3.png" alt="Service 3">
+          </div>
+      </div>
+      <div class="stats">
+          <div class="stats-item">
+              <h3>100+</h3>
+              <p>Elderly Clients</p>
+          </div>
+          <div class="stats-item">
+              <h3>50+</h3>
+              <p>Team members</p>
+          </div>
+          <div class="stats-item">
+              <h3>500+</h3>
+              <p>Positive reviews</p>
+          </div>
+          <div class="stats-item">
+              <h3>50+</h3>
+              <p>Served</p>
+          </div>
+      </div>
+  </section>
+  
 
-    <section class="contact-section">
-        <h2>Contact Us</h2>
-        <p>Get in Touch to Schedule a Visit</p>
-        <p>Reach out to schedule a visit at a time that works best for you. We're excited to show you around and provide any information you need!</p>
-        <div class="contact-form">
-            <input type="text" placeholder="Name">
-            <input type="email" placeholder="Email">
-            <input type="text" placeholder="Phone">
-            <textarea rows="4" placeholder="Message"></textarea>
-            <button>Send Message</button>
+    <div class="hero">
+        <div class="hero-overlay">
+          <h2>What can Eldercare Co. offer:</h2>
+          <h1>Medication & Appointment Reminder</h1>
         </div>
-    </section>
+      </div>
+
+      <section class="features-section">
+        <div class="features-container">
+          <div class="feature-box">
+            <h3>Schedule Arrangement</h3>
+            <p>Eldercare Co. helps you in organizing your appointments and medication intake schedules of what is prescribed for you.</p>
+          </div>
+          <div class="feature-box">
+            <h3>Local Clinics</h3>
+            <p>Eldercare Co. will ask to have access to your current location to give you options about the local clinics in the area you're in.</p>
+          </div>
+          <div class="feature-box">
+            <h3>Medication Lists</h3>
+            <p>The app will be able to give you the information and visualization of the medication that you need to intake. Also the reminder of when to take it.</p>
+          </div>
+          <div class="feature-box">
+            <h3>Medical Records</h3>
+            <p>This app will have your data records when it comes to your current medical/health condition.</p>
+          </div>
+        </div>
+      </section>
+
+    <section class="newsletter">
+        <div class="newsletter-content">
+          <div>
+            <b><h2>Want more? Enter Email Address to Subscribe</h2></b>
+            <p>Receive tips and advice on caregiving for your loved one.</p>
+          </div>
+          <div>
+            <form>
+              <input type="email" placeholder="Enter Email Address" required />
+              <button type="submit">Subscribe</button>
+            </form>
+          </div>
+        </div>
+      </section>
 
     <footer>
-        <div class="subscribe">
-            <p>Want more? Enter Email Address to Subscribe</p>
-            <input type="email" placeholder="Enter Email Address">
-            <button>Subscribe</button>
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>ELDERCARE CO.</h3>
+          <p>provides compassionate, personalized companionship and care to seniors.</p>
         </div>
-        <div class="footer-links">
-            <div>
-                <h4>ElderCare Co.</h4>
-                <p>Provides compassionate, personalized companionship and care to seniors.</p>
-            </div>
-            <div>
-                <h4>Navigation</h4>
-                <a href="#">Home</a>
-                <a href="#">About Us</a>
-                <a href="#">Care Service</a>
-                <a href="#">Healthcare Professionals</a>
-            </div>
-            <div>
-                <h4>Useful Links</h4>
-                <a href="#">Your Account</a>
-                <a href="#">Become one of Us</a>
-                <a href="#">Find Location</a>
-                <a href="#">Help</a>
-            </div>
-            <div>
-                <h4>Contact</h4>
-                <p>Vasquez Beach, San Andreas Bay</p>
-                <p>Email: Franklin@gmail.com</p>
-                <p>Phone: (555) 123-4567</p>
-                <p>Fax: (123) 456-7890</p>
-            </div>
+        <div class="footer-section">
+          <h3>NAVIGATION</h3>
+          <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Care service</a></li>
+            <li><a href="#">Healthcare Professionals</a></li>
+          </ul>
         </div>
-        <div class="copyright">
-            &copy; Copyright 2025 ElderCare Co. - All Rights Reserved
+        <div class="footer-section">
+          <h3>USEFUL LINKS</h3>
+          <ul>
+            <li><a href="#">Your Account</a></li>
+            <li><a href="#">Become one of Us</a></li>
+            <li><a href="#">Find Location</a></li>
+            <li><a href="#">Help</a></li>
+          </ul>
         </div>
+        <div class="footer-section">
+          <h3>CONTACT</h3>
+          <address>
+            Vespucci Beach, San Andreas bay<br />
+            <a href="mailto:Franklin@gmail.com">Franklin@gmail.com</a><br />
+            <a href="tel:+15551234567">(555) 123-4567</a><br />
+            <a href="tel:+11234567890">(123) 456-7890</a>
+          </address>
+        </div>
+      </div>
     </footer>
+    <div class="copyright">
+      <p>&copy; Copyright 2025 inc.</p>
+    </div>
 
 </body>
 </html>
