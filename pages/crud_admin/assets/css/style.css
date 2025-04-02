@@ -254,6 +254,7 @@ nav ul li a[aria-current="page"] {
     justify-content: space-between;
     align-items: flex-start;
     margin-bottom: 30px;
+    padding-top: 3rem;
 }
 
 .content-header h2 {
@@ -483,4 +484,314 @@ nav ul li a[aria-current="page"] {
 
 .action-icons i:hover {
     color: #7451f0;
+}
+
+.nav-menu .dropdown {
+    position: relative;
+}
+
+.nav-menu .dropdown-toggle::after {
+    display: inline-block;
+    margin-left: 0.255em;
+    vertical-align: 0.255em;
+    content: "";
+    border-top: 0.3em solid;
+    border-right: 0.3em solid transparent;
+    border-bottom: 0;
+    border-left: 0.3em solid transparent;
+}
+
+.nav-menu .dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 200px;
+    padding: 0.5rem 0;
+    margin: 0;
+    background-color: #fff;
+    border: 1px solid rgba(0,0,0,.15);
+    border-radius: 0.25rem;
+    box-shadow: 0 0.5rem 1rem rgba(0,0,0,.175);
+}
+
+.nav-menu .dropdown-menu.show {
+    display: block;
+}
+
+.nav-menu .dropdown-item {
+    display: block;
+    width: 100%;
+    padding: 0.5rem 1rem;
+    clear: both;
+    text-align: inherit;
+    white-space: nowrap;
+    background-color: transparent;
+    border: 0;
+    text-decoration: none;
+    color: #333;
+}
+
+.nav-menu .dropdown-item:hover {
+    background-color: #f8f9fa;
+    color: #16181b;
+}
+
+/* Mobile - 375 x 667 */
+@media screen and (max-width: 767px) {
+    .top-bar {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+    }
+
+    .cta-buttons {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    nav {
+        flex-direction: column;
+        padding: 10px;
+    }
+
+    .logo {
+        height: 40px;
+        margin-bottom: 15px;
+    }
+
+    .nav-menu {
+        flex-direction: column;
+        width: 100%;
+        gap: 10px;
+        text-align: center;
+    }
+
+    .dropdown-menu {
+        position: static !important;
+        width: 100%;
+        box-shadow: none !important;
+        text-align: center;
+    }
+
+    .browse-plans-btn {
+        margin-top: 15px;
+        width: 100%;
+        text-align: center;
+    }
+
+    /* CRUD Admin specific mobile styles */
+    .main-container .content-wrapper {
+        flex-direction: column;
+    }
+
+    .crud-sidebar {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .content-area {
+        width: 100%;
+        padding: 10px;
+    }
+
+    .content-header {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .header-actions {
+        width: 100%;
+    }
+
+    .table-container {
+        overflow-x: auto;
+    }
+
+    .appointment-table {
+        min-width: 600px;
+    }
+}
+
+/* Tablet - 1024 x 768 */
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+    .top-bar {
+        padding: 10px 0px;
+    }
+
+    nav {
+        padding: 15px 30px;
+    }
+
+    .nav-menu {
+        gap: 15px;
+    }
+
+    .crud-sidebar {
+        width: 200px;
+    }
+
+    .content-area {
+        padding: 20px;
+    }
+
+    .table-container {
+        overflow-x: auto;
+    }
+
+    .appointment-table {
+        min-width: 700px;
+    }
+
+    .header-actions {
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+}
+
+/* Laptop - 1440 x 900 */
+@media screen and (min-width: 1024px) and (max-width: 1439px) {
+    .top-bar {
+        padding: 10px 40px;
+    }
+
+    nav {
+        padding: 15px 40px;
+    }
+
+    .nav-menu {
+        gap: 25px;
+    }
+
+    .crud-sidebar {
+        width: 250px;
+    }
+
+    .content-area {
+        padding: 25px;
+    }
+
+    .table-container {
+        overflow-x: hidden;
+    }
+}
+
+/* Desktop - 1920 x 1080 */
+@media screen and (min-width: 1440px) {
+    .top-bar {
+        padding: 10px 60px;
+    }
+
+    nav {
+        padding: 15px 60px;
+    }
+
+    .nav-menu {
+        gap: 30px;
+    }
+
+    .main-container {
+        max-width: 1800px;
+        margin: 0 auto;
+    }
+
+    .crud-sidebar {
+        width: 300px;
+    }
+
+    .content-area {
+        padding: 30px;
+    }
+
+    .table-container {
+        overflow-x: hidden;
+    }
+
+    .appointment-table {
+        width: 100%;
+    }
+}
+
+/* Shared responsive styles for the modal */
+@media screen and (max-width: 768px) {
+    .modal-dialog {
+        margin: 10px;
+    }
+
+    .modal-content {
+        padding: 15px;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+}
+
+/* Additional utility classes for responsive design */
+.hide-on-mobile {
+    display: none !important;
+}
+
+@media screen and (min-width: 768px) {
+    .hide-on-mobile {
+        display: block !important;
+    }
+}
+
+/* Responsive typography */
+@media screen and (max-width: 767px) {
+    h2 {
+        font-size: 1.5rem;
+    }
+    
+    h4 {
+        font-size: 1.2rem;
+    }
+    
+    .crud-title {
+        font-size: 1.1rem;
+    }
+}
+
+/* Responsive table adjustments */
+@media screen and (max-width: 767px) {
+    .appointment-table th,
+    .appointment-table td {
+        padding: 8px;
+        font-size: 14px;
+    }
+}
+
+/* Responsive form elements */
+@media screen and (max-width: 767px) {
+    .form-control {
+        font-size: 16px; /* Prevents zoom on iOS */
+        padding: 8px;
+    }
+
+    .search-bar input {
+        width: 100%;
+    }
+}
+
+/* Add a hamburger menu for mobile */
+.menu-toggle {
+    display: none;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 767px) {
+    .menu-toggle {
+        display: block;
+    }
+
+    .nav-menu {
+        display: none;
+    }
+
+    .nav-menu.active {
+        display: flex;
+    }
 }

@@ -22,11 +22,20 @@
 
         <!-- Main Navigation -->
         <nav>
-            <img class="logo" src="./assets/img/logo2.png" alt="Eldercare Co. Logo">
+            <img class="logo" src="./assets/img/logo.png" alt="Eldercare Co. Logo">
+            <div class="menu-toggle" id="menuToggle">
+                <i class="fas fa-bars"></i>
+            </div>
             <ul class="nav-menu">
                 <li><a href="../../index.html">Home</a></li>
                 <li><a href="../aboutus/index.html">About Us</a></li>
-                <li><a href="#" aria-current="page">Care Service</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown">Care Service</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="../location/index.html" class="dropdown-item">Location</a></li>
+                        <li><a href="../care_service_client/index.html" class="dropdown-item">Care Service</a></li>
+                    </ul>
+                </li>
                 <li><a href="#">Personal Records</a></li>
             </ul>
             <a href="#" class="browse-plans-btn">Login</a>
