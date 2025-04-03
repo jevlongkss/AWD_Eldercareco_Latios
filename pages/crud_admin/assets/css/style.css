@@ -653,7 +653,7 @@ nav ul li a[aria-current="page"] {
 /* Laptop - 1440 x 900 */
 @media screen and (min-width: 1024px) and (max-width: 1439px) {
     .top-bar {
-        padding: 10px 40px;
+        padding: 10px 0px;
     }
 
     nav {
@@ -680,7 +680,7 @@ nav ul li a[aria-current="page"] {
 /* Desktop - 1920 x 1080 */
 @media screen and (min-width: 1440px) {
     .top-bar {
-        padding: 10px 60px;
+        padding: 10px 0px;
     }
 
     nav {
