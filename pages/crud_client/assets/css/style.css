@@ -316,10 +316,12 @@
   
   .care-section {
     padding: 20px;
+    height: 73vh;
+    
   }
   
   .container {
-    background-color: #3672A4; /* Adjusted blue color */
+    background-color: #3672a3; /* Adjusted blue color */
     padding: 40px;
     border-radius: 10px;
     display: flex;
@@ -368,6 +370,8 @@
     border-radius: 5px;
     font-weight: bold;
     transition: background 0.3s ease;
+    width: 60vw;
+    align: center;
   }
   
   .locations-cta:hover {
