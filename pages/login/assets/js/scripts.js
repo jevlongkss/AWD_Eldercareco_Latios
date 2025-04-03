@@ -1,5 +1,5 @@
 // API Client for ElderCare Co.
-const API_BASE_URL = 'https://demo-api-skills.vercel.app/api/ElderlyCare/appointments';
+const API_BASE_URL = 'https://demo-api-skills.vercel.app/api/ElderlyCare/users';
 
 class ElderCareAPI {
     // Login user
