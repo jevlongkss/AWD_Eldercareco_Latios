@@ -235,18 +235,27 @@
   
   /* Third Section Styles */
   
-  .care-section {
-    padding: 60px 0;
+  .container {
+    max-width: 1200px;
+    margin: 9rem auto;
+    padding: 3rem;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    background-color: #dfd1d1;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   }
-  
-  .content1 {
-    padding: 20px;
+
+  .text-content {
+    flex: 1;
   }
-  
-  .content1 h1 {
-    font-size: 2rem;
+
+  .text-content h1 {
+    font-size: 1.8rem;
     font-weight: bold;
-    color: #333;
+    color: #000;
+    margin-bottom: 1rem;
   }
   
   .content1 p {
