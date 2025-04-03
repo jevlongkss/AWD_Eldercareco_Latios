@@ -1,53 +1,41 @@
 // API Base URLs
-const USERS_API_URL = 'https://demo-api-skills.vercel.app/api/ElderlyCare/users';
-const APPOINTMENTS_API_URL = 'https://demo-api-skills.vercel.app/api/ElderlyCare/appointments';
+const API_URL = 'https://demo-api-skills.vercel.app/api/ElderlyCare';
+const APPOINTMENTS_API_URL = `${API_URL}/appointments`;
 
-// Fetch and display users
-async function fetchUsers() {
-    try {
-        const response = await fetch(USERS_API_URL);
-        if (!response.ok) throw new Error('Failed to fetch users');
-        const users = await response.json();
-        displayUsers(users);
-    } catch (error) {
-        console.error('Error:', error);
-        alert('Failed to fetch users');
+// Sample initial data (will be replaced with API data)
+let appointments = [
+    {
+        id: 1,
+        name: 'Ellen Ross',
+        email: 'ellenross@gmail.com',
+        phone: '09123456789',
+        contactPref: 'Phone',
+        location: 'Manila, PH',
+        dateOfAppointment: '2025-05-02'
     }
-}
+];
 
-// Fetch and display appointments
+// Fetch appointments from API
 async function fetchAppointments() {
     try {
         const response = await fetch(APPOINTMENTS_API_URL);
         if (!response.ok) throw new Error('Failed to fetch appointments');
-        const appointments = await response.json();
+        const data = await response.json();
+        appointments = data.map(apt => ({
+            id: apt.id,
+            name: apt.name || '',
+            email: apt.email || '',
+            phone: apt.phone || '',
+            contactPref: apt.contactPref || 'Email',
+            location: apt.location || '',
+            dateOfAppointment: new Date(apt.dateTime).toISOString().split('T')[0]
+        }));
         displayAppointments(appointments);
     } catch (error) {
         console.error('Error:', error);
-        alert('Failed to fetch appointments');
+        // If API fails, use sample data
+        displayAppointments(appointments);
     }
-}
-
-// Display users in table
-function displayUsers(users) {
-    const tbody = document.getElementById('userTableBody');
-    if (!tbody) return;
-    
-    tbody.innerHTML = '';
-    users.forEach(user => {
-        const row = document.createElement('tr');
-        row.innerHTML = `
-            <td>${user.id}</td>
-            <td>${user.username || ''}</td>
-            <td>${user.email || ''}</td>
-            <td>${user.phoneNumber || ''}</td>
-            <td>
-                <button onclick="editUser('${user.id}')" class="btn btn-primary btn-sm">Edit</button>
-                <button onclick="deleteUser('${user.id}')" class="btn btn-danger btn-sm">Delete</button>
-            </td>
-        `;
-        tbody.appendChild(row);
-    });
 }
 
 // Display appointments in table
@@ -58,54 +46,24 @@ function displayAppointments(appointments) {
     tbody.innerHTML = '';
     appointments.forEach(appointment => {
         const row = document.createElement('tr');
-        const dateTime = new Date(appointment.dateTime).toLocaleString();
         row.innerHTML = `
-            <td>${appointment.id}</td>
-            <td>${appointment.userId}</td>
-            <td>${appointment.title}</td>
-            <td>${appointment.type}</td>
-            <td>${dateTime}</td>
-            <td>${appointment.location || ''}</td>
-            <td>${appointment.medicationDetails || ''}</td>
+            <td>${appointment.name}</td>
+            <td>${appointment.email}</td>
+            <td>${appointment.phone}</td>
+            <td>${appointment.contactPref}</td>
+            <td>${appointment.location}</td>
+            <td>${appointment.dateOfAppointment}</td>
             <td>
-                <button onclick="editAppointment('${appointment.id}')" class="btn btn-primary btn-sm">Edit</button>
-                <button onclick="deleteAppointment('${appointment.id}')" class="btn btn-danger btn-sm">Delete</button>
+                <button onclick="editAppointment(${appointment.id})" class="btn btn-primary btn-sm">
+                    <i class="fas fa-edit"></i>
+                </button>
+                <button onclick="deleteAppointment(${appointment.id})" class="btn btn-danger btn-sm">
+                    <i class="fas fa-trash"></i>
+                </button>
             </td>
         `;
         tbody.appendChild(row);
     });
-}
-
-// Create new appointment
-async function createAppointment(formData) {
-    try {
-        const response = await fetch(APPOINTMENTS_API_URL, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                userId: formData.userId,
-                type: formData.type,
-                title: formData.title,
-                dateTime: new Date(formData.dateTime).toISOString(),
-                location: formData.location,
-                medicationDetails: formData.medicationDetails
-            }),
-        });
-
-        if (!response.ok) {
-            const error = await response.json();
-            throw new Error(error.error || 'Failed to create appointment');
-        }
-
-        await fetchAppointments(); // Refresh the table
-        return true;
-    } catch (error) {
-        console.error('Error:', error);
-        alert(error.message);
-        return false;
-    }
 }
 
 // Delete appointment
@@ -118,7 +76,8 @@ async function deleteAppointment(id) {
         });
 
         if (!response.ok) throw new Error('Failed to delete appointment');
-        await fetchAppointments(); // Refresh the table
+        appointments = appointments.filter(appointment => appointment.id !== id);
+        displayAppointments(appointments);
     } catch (error) {
         console.error('Error:', error);
         alert('Failed to delete appointment');
@@ -127,22 +86,22 @@ async function deleteAppointment(id) {
 
 // Edit appointment
 async function editAppointment(id) {
+    const appointment = appointments.find(a => a.id === id);
+    if (!appointment) return;
+    
     try {
-        const response = await fetch(`${APPOINTMENTS_API_URL}/${id}`);
-        if (!response.ok) throw new Error('Failed to fetch appointment');
-        const appointment = await response.json();
-        
         // Populate form with appointment data
-        document.getElementById('appointmentId').value = appointment.id;
-        document.getElementById('appointmentUserId').value = appointment.userId;
-        document.getElementById('appointmentTitle').value = appointment.title;
-        document.getElementById('appointmentType').value = appointment.type;
-        document.getElementById('appointmentDateTime').value = new Date(appointment.dateTime)
-            .toISOString().slice(0, 16); // Format for datetime-local input
-        document.getElementById('appointmentLocation').value = appointment.location || '';
-        document.getElementById('appointmentMedicationDetails').value = appointment.medicationDetails || '';
+        document.getElementById('name').value = appointment.name;
+        document.getElementById('email').value = appointment.email;
+        document.getElementById('phone').value = appointment.phone;
+        document.getElementById('contactPref').value = appointment.contactPref;
+        document.getElementById('location').value = appointment.location;
+        document.getElementById('dateOfAppointment').value = appointment.dateOfAppointment;
         
-        // Show edit modal
+        // Store the ID being edited
+        document.getElementById('appointmentForm').dataset.editId = id;
+        
+        // Show modal
         const modal = new bootstrap.Modal(document.getElementById('appointmentModal'));
         modal.show();
     } catch (error) {
@@ -151,82 +110,108 @@ async function editAppointment(id) {
     }
 }
 
-// Update appointment
-async function updateAppointment(formData) {
-    try {
-        const response = await fetch(`${APPOINTMENTS_API_URL}/${formData.id}`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                userId: formData.userId,
-                type: formData.type,
-                title: formData.title,
-                dateTime: new Date(formData.dateTime).toISOString(),
-                location: formData.location,
-                medicationDetails: formData.medicationDetails
-            }),
-        });
+// Save appointment (create or update)
+async function saveAppointment() {
+    const form = document.getElementById('appointmentForm');
+    const editId = parseInt(form.dataset.editId);
+    
+    const appointmentData = {
+        name: document.getElementById('name').value,
+        email: document.getElementById('email').value,
+        phone: document.getElementById('phone').value,
+        contactPref: document.getElementById('contactPref').value,
+        location: document.getElementById('location').value,
+        dateTime: new Date(document.getElementById('dateOfAppointment').value).toISOString()
+    };
 
-        if (!response.ok) {
-            const error = await response.json();
-            throw new Error(error.error || 'Failed to update appointment');
+    try {
+        if (editId) {
+            // Update existing appointment
+            const response = await fetch(`${APPOINTMENTS_API_URL}/${editId}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(appointmentData)
+            });
+
+            if (!response.ok) throw new Error('Failed to update appointment');
+            
+            const index = appointments.findIndex(a => a.id === editId);
+            if (index !== -1) {
+                appointments[index] = { 
+                    ...appointments[index], 
+                    ...appointmentData,
+                    dateOfAppointment: document.getElementById('dateOfAppointment').value
+                };
+            }
+        } else {
+            // Create new appointment
+            const response = await fetch(APPOINTMENTS_API_URL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(appointmentData)
+            });
+
+            if (!response.ok) throw new Error('Failed to create appointment');
+            
+            const newId = Math.max(...appointments.map(a => a.id), 0) + 1;
+            appointments.push({ 
+                id: newId,
+                ...appointmentData,
+                dateOfAppointment: document.getElementById('dateOfAppointment').value
+            });
         }
 
-        await fetchAppointments(); // Refresh the table
-        return true;
+        // Refresh table and close modal
+        displayAppointments(appointments);
+        const modal = bootstrap.Modal.getInstance(document.getElementById('appointmentModal'));
+        modal.hide();
+        form.reset();
+        delete form.dataset.editId;
     } catch (error) {
         console.error('Error:', error);
         alert(error.message);
-        return false;
     }
 }
 
 // Event Listeners
 document.addEventListener('DOMContentLoaded', () => {
-    // Fetch initial data
-    fetchUsers();
+    // Fetch initial appointments
     fetchAppointments();
 
-    // Handle appointment form submission
-    const appointmentForm = document.getElementById('appointmentForm');
-    if (appointmentForm) {
-        appointmentForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const formData = {
-                id: document.getElementById('appointmentId').value,
-                userId: document.getElementById('appointmentUserId').value,
-                title: document.getElementById('appointmentTitle').value,
-                type: document.getElementById('appointmentType').value,
-                dateTime: document.getElementById('appointmentDateTime').value,
-                location: document.getElementById('appointmentLocation').value,
-                medicationDetails: document.getElementById('appointmentMedicationDetails').value
-            };
-
-            let success;
-            if (formData.id) {
-                success = await updateAppointment(formData);
-            } else {
-                success = await createAppointment(formData);
-            }
-
-            if (success) {
-                const modal = bootstrap.Modal.getInstance(document.getElementById('appointmentModal'));
-                modal.hide();
-                appointmentForm.reset();
-            }
+    // Add New Client button
+    const addNewClientBtn = document.getElementById('addNewClient');
+    if (addNewClientBtn) {
+        addNewClientBtn.addEventListener('click', () => {
+            const form = document.getElementById('appointmentForm');
+            form.reset();
+            delete form.dataset.editId;
+            const modal = new bootstrap.Modal(document.getElementById('appointmentModal'));
+            modal.show();
         });
     }
 
-    // Handle new appointment button
-    const newAppointmentBtn = document.getElementById('newAppointmentBtn');
-    if (newAppointmentBtn) {
-        newAppointmentBtn.addEventListener('click', () => {
-            document.getElementById('appointmentForm').reset();
-            document.getElementById('appointmentId').value = '';
-            const modal = new bootstrap.Modal(document.getElementById('appointmentModal'));
-            modal.show();
+    // Save button in modal
+    const saveBtn = document.getElementById('saveAppointment');
+    if (saveBtn) {
+        saveBtn.addEventListener('click', saveAppointment);
+    }
+
+    // Search functionality
+    const searchInput = document.getElementById('searchInput');
+    if (searchInput) {
+        searchInput.addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            const filteredAppointments = appointments.filter(appointment => 
+                appointment.name.toLowerCase().includes(searchTerm) ||
+                appointment.email.toLowerCase().includes(searchTerm) ||
+                appointment.phone.includes(searchTerm) ||
+                appointment.location.toLowerCase().includes(searchTerm)
+            );
+            displayAppointments(filteredAppointments);
         });
     }
 });
