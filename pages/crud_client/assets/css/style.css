@@ -314,66 +314,63 @@
   
   /* Third Section Styles */
   
-  .care-section {
-    padding: 20px;
-  }
-  
   .container {
-    background-color: #3672A4; /* Adjusted blue color */
-    padding: 40px;
-    border-radius: 10px;
-    display: flex;
-    flex-wrap: wrap; /* Ensures responsiveness */
-    justify-content: space-between;
-    align-items: center;
-    max-width: 100%;
-  }
-  
-  .content1 {
-    color: #000000; /* White text for contrast */
-    flex: 1;
-    min-width: 300px;
-    max-width: 60%;
-  }
-  
-  .right-section {
-    flex: 1;
-    min-width: 300px;
-    max-width: 35%;
-    text-align: center;
-  }
-  
-  .image-placeholder {
-    margin-bottom: 20px;
-  }
-  
-  .placeholder-box {
-    width: 300px;
-    height: 200px;
-    background-color: #ddd;
+    max-width: 1200px;
+    margin: 9rem auto;
+    padding: 3rem;
     display: flex;
     align-items: center;
-    justify-content: center;
-    font-size: 16px;
-    color: #555;
+    gap: 2rem;
+    background-color: #dfd1d1;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   }
-  
-  .locations-cta {
-    display: inline-block;
-    padding: 12px 20px;
-    background-color: #6d28d9;
-    color: white;
-    font-size: 18px;
-    text-decoration: none;
-    border-radius: 5px;
+
+  .text-content {
+    flex: 1;
+  }
+
+  .text-content h1 {
+    font-size: 1.8rem;
     font-weight: bold;
-    transition: background 0.3s ease;
+    color: #000;
+    margin-bottom: 1rem;
   }
-  
-  .locations-cta:hover {
-    background-color: #c084fc;
+
+  .text-content p {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #333;
+    margin-bottom: 1rem;
   }
-  
+
+  .cta-button {
+    display: inline-block;
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #fff;
+    background-color: #8c6eff;
+    border: none;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+  }
+
+  .cta-button:hover {
+    background-color: #7357d6;
+  }
+
+  .image-container {
+    flex: 1;
+  }
+
+  .image-container img {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+  }
+
   /* footer */
   .newsletter {
     background-color: white;
