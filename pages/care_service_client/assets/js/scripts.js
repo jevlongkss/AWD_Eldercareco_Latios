@@ -59,6 +59,28 @@ class ElderCareAPI {
             throw error;
         }
     }
+
+    // Schedule Reminder
+    async scheduleReminder(appointmentId, reminderData) {
+        try {
+            const response = await fetch(`${API_BASE_URL}/${appointmentId}/reminder`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(reminderData),
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to schedule reminder');
+            }
+
+            return await response.json();
+        } catch (error) {
+            console.error('Error scheduling reminder:', error);
+            throw error;
+        }
+    }
 }
 
 // Export the API client
@@ -71,6 +93,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const appointmentError = document.getElementById('appointmentError');
     const typeSelect = document.getElementById('type');
     const medicationDetailsGroup = document.getElementById('medicationDetailsGroup');
+    const reminderGroup = document.getElementById('reminderGroup');
 
     // Show/hide medication details based on appointment type
     if (typeSelect) {
@@ -80,6 +103,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     e.target.value === 'medication' ? 'block' : 'none';
             }
         });
+    }
+
+    // Show/hide reminder options
+    if (reminderGroup) {
+        reminderGroup.style.display = 'block';
     }
 
     if (appointmentForm) {
@@ -108,6 +136,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 const dateTime = document.getElementById('dateTime').value;
                 const location = document.getElementById('location').value;
                 const medicationDetails = document.getElementById('medicationDetails')?.value;
+                
+                // Get reminder preferences
+                const reminderEnabled = document.getElementById('reminderEnabled')?.checked;
+                const reminderType = document.getElementById('reminderType')?.value;
+                const reminderTime = document.getElementById('reminderTime')?.value;
 
                 // Get userId from localStorage (assuming it was stored during login)
                 const userData = JSON.parse(localStorage.getItem('userData') || '{}');
@@ -124,12 +157,27 @@ document.addEventListener('DOMContentLoaded', () => {
                     title,
                     dateTime: new Date(dateTime).toISOString(),
                     location: location || undefined,
-                    medicationDetails: type === 'medication' ? medicationDetails : undefined
+                    medicationDetails: type === 'medication' ? medicationDetails : undefined,
+                    reminder: reminderEnabled ? {
+                        type: reminderType,
+                        time: reminderTime
+                    } : undefined
                 };
 
                 // Send to API
                 const response = await elderCareAPI.createAppointment(appointmentData);
                 console.log('Appointment created:', response);
+
+                // If reminder is enabled, schedule it
+                if (reminderEnabled && response.id) {
+                    const reminderData = {
+                        type: reminderType,
+                        time: reminderTime,
+                        appointmentId: response.id,
+                        userId: userId
+                    };
+                    await elderCareAPI.scheduleReminder(response.id, reminderData);
+                }
 
                 // Clear form
                 appointmentForm.reset();
@@ -191,6 +239,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     <p>Date: ${new Date(appointment.dateTime).toLocaleString()}</p>
                     ${appointment.location ? `<p>Location: ${appointment.location}</p>` : ''}
                     ${appointment.medicationDetails ? `<p>Medication Details: ${appointment.medicationDetails}</p>` : ''}
+                    ${appointment.reminder ? `
+                        <p>Reminder: ${appointment.reminder.type === 'email' ? 'Email' : 'SMS'} 
+                        ${appointment.reminder.time} before appointment</p>
+                    ` : ''}
                 `;
                 appointmentsList.appendChild(appointmentElement);
             });
