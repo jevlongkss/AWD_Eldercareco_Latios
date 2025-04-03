@@ -314,10 +314,52 @@
   
   /* Third Section Styles */
   
+<<<<<<< HEAD
+  .care-section {
+    padding: 20px;
+    height: 73vh;
+    
+  }
+  
+  .container {
+    background-color: #3672a3; /* Adjusted blue color */
+    padding: 40px;
+    border-radius: 10px;
+    display: flex;
+    flex-wrap: wrap; /* Ensures responsiveness */
+    justify-content: space-between;
+    align-items: center;
+    max-width: 100%;
+  }
+  
+  .content1 {
+    color: #000000; /* White text for contrast */
+    flex: 1;
+    min-width: 300px;
+    max-width: 60%;
+  }
+  
+  .right-section {
+    flex: 1;
+    min-width: 300px;
+    max-width: 35%;
+    text-align: center;
+  }
+  
+  .image-placeholder {
+    margin-bottom: 20px;
+  }
+  
+  .placeholder-box {
+    width: 300px;
+    height: 200px;
+    background-color: #ddd;
+=======
   .container {
     max-width: 1200px;
     margin: 9rem auto;
     padding: 3rem;
+>>>>>>> afc60d1e7906c5e8c02da5465541175dbcead23f
     display: flex;
     align-items: center;
     gap: 2rem;
@@ -333,8 +375,14 @@
   .text-content h1 {
     font-size: 1.8rem;
     font-weight: bold;
+<<<<<<< HEAD
+    transition: background 0.3s ease;
+    width: 60vw;
+    align: center;
+=======
     color: #000;
     margin-bottom: 1rem;
+>>>>>>> afc60d1e7906c5e8c02da5465541175dbcead23f
   }
 
   .text-content p {
