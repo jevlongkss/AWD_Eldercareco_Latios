@@ -10,10 +10,11 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js" defer></script>
-    <link rel="stylesheet" href="/pages/profile/assets/css/style.css">
+    <link rel="stylesheet" href="/pages/crud_client/assets/css/style.css">
     <link rel="stylesheet" href="../../assets/css/header.css">
 </head>
 <body>
+
 <!-- Top Bar -->
 <div class="top-bar">
   <span>Call +63 2 1234 5678</span>
@@ -60,104 +61,76 @@
         </li>
       </ul>
       <!-- Browse Plans Button -->
-      <a href="../login/index.html" class="btn btn-primary">Login</a>
+      <a href="../profile/index.html" class="btn btn-primary">Profile</a>
     </div>
   </div>
 </nav>
 
-  <h1>History</h1>
-  <div class="container">
-    <!-- Profile Card -->
-    <div class="profile-card">
-      <img src="https://via.placeholder.com/120" alt="Profile Picture">
-      <h2>Ellen Ross</h2>
-    </div>
-
-    <!-- Info Card -->
-    <div class="info-card">
-      <h2>Ellen Ross <span class="gender-icon">♀</span></h2>
-      <table>
-        <tr>
-          <td>Age</td>
-          <td>67</td>
-        </tr>
-        <tr>
-          <td>Birthday</td>
-          <td>03/24/1958</td>
-        </tr>
-        <tr>
-          <td>Weight</td>
-          <td>65 kgs</td>
-        </tr>
-        <tr>
-          <td>Height</td>
-          <td>100 cm</td>
-        </tr>
-        <tr>
-          <td>Ethnicity</td>
-          <td>British</td>
-        </tr>
-        <tr>
-          <td>Language Spoken</td>
-          <td>English</td>
-        </tr>
-        <tr>
-          <td>Marital Status</td>
-          <td>Widowed</td>
-        </tr>
-        <tr>
-          <td>Phone</td>
-          <td>415-555-264</td>
-        </tr>
-      </table>
-    </div>
-
-    <!-- Appointment Card -->
-    <div class="appointment-card">
-      <h2>Upcoming Appointments</h2>
-      <table>
-        <tr>
-          <td>Name</td>
-          <td>Ellen Ross</td>
-        </tr>
-        <tr>
-          <td>Date</td>
-          <td>May 02, 2025</td>
-        </tr>
-        <tr>
-          <td>Location</td>
-          <td>Manila, PH</td>
-        </tr>
-      </table>
-      <a href="#" class="cancel-btn">CANCEL</a>
-    </div>
-
-    <!-- Notes Card -->
-    <div class="notes-card">
-      <h2>Important Notes</h2>
-      <p><span class="icon">⚠️</span> Allergies</p>
-    </div>
-
-    <!-- Guardian Card -->
-    <div class="guardian-card">
-      <h2>Guardian</h2>
-      <table>
-        <tr>
-          <td>Son</td>
-          <td>Dale Hurst</td>
-        </tr>
-        <tr>
-          <td>Phone</td>
-          <td>415-845-632</td>
-        </tr>
-        <tr>
-          <td>Address</td>
-          <td>135 Amber Drive Beaverton</td>
-        </tr>
-      </table>
+<!-- First Section  -->
+<section class="section">
+  <div class="content">
+    <h1>Find One of the Best Senior Home Care Services.</h1>
+    <p>Tell us where care is needed for your loved ones.</p>
+    <div class="form-group">
+      <label for="state">States</label>
+      <select id="state">
+        <option value="" disabled selected>State where care is needed</option>
+        <option value="california">California</option>
+        <option value="texas">Texas</option>
+        <option value="florida">Florida</option>
+        <option value="new_york">New York</option>
+      </select>
+      <a href="../care_service_client/index.html">
+      <button type="button">Search For Care</button>
+      </a>
     </div>
   </div>
+  <div class="image">
+    <img src="./img/image-1-10.png" alt="Senior Home Care">
+  </div>
+</section>
 
+<!-- Second Section -->
+<section class="section-alt">
+  <div class="image">
+    <img src="./img/pexels-kampus-7551646-10.png" alt="Elderly Assistance">
+  </div>
+  <div class="content">
+    <h1>ElderCare Co. Your Trusted Partner in Quality Home Care</h1>
+    <p><strong>Seeking dependable and compassionate home care services for your loved one?</strong></p>
+    <p>
+      At ElderCare Co., we deliver personalized care solutions designed to meet the unique needs of every senior. Whether it’s assistance with daily routines or meaningful companionship, our dedicated caregivers provide support right in the comfort of home ensuring peace of mind for you and a better quality of life for your loved one.
+    </p>
+    <p>
+      Enter your city, state, or ZIP code to connect with a local ElderCare Co. provider and discover how we can make a difference in your family’s life.
+    </p>
+  </div>
+</section>
+
+<!-- Third Section -->
+
+<section class="care-section">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-6 content1">
+        <h1>Personalized Home Care with a Local Touch</h1>
+        <p>At ElderCare Co., we take pride in being locally owned and deeply connected to the communities we serve. Our team works closely with you to provide personalized, one-on-one support throughout the entire caregiving journey.</p>
+        <p>When you reach out to your local ElderCare Co. office, we'll schedule a free, no-obligation consultation. During this meeting, our care coordinator will take the time to understand your loved one's unique needs, craft a customized care plan, and answer any questions you may have about our in-home senior care services.</p>
+        <p>Take the first step toward compassionate, tailored care – contact your local ElderCare Co. office today for a free consultation!</p>
+      </div>
+      <div class="col-lg-6 right-section">
+        <div class="image-placeholder">
+          <div class="placeholder-box">
+            <img src="./img/freepik-upload-59628-20.png">
+          </div>
+        </div>
+        <a href="../location/index.html" class="locations-cta">View our available Locations</a>
+      </div>
+    </div>
+  </div>
+</section>
+  
+<!-- footer -->
   <section class="newsletter">
     <div class="newsletter-content">
       <div>
@@ -182,18 +155,18 @@
     <div class="footer-section">
       <h3>NAVIGATION</h3>
       <ul>
-        <li><a href="#">Home</a></li>
-        <li><a href="#">About Us</a></li>
-        <li><a href="#">Care service</a></li>
-        <li><a href="#">Healthcare Professionals</a></li>
+        <li><a href="../../index.html">Home</a></li>
+        <li><a href="../aboutus/index.html">About Us</a></li>
+        <li><a href="../crud_client/index.html">Care service</a></li>
+        <li><a href="../profile/index.html">Personal Record</a></li>
       </ul>
     </div>
     <div class="footer-section">
       <h3>USEFUL LINKS</h3>
       <ul>
-        <li><a href="#">Your Account</a></li>
+        <li><a href="../profile/index.html">Your Account</a></li>
         <li><a href="#">Become one of Us</a></li>
-        <li><a href="#">Find Location</a></li>
+        <li><a href="../location/index.html">Find Location</a></li>
         <li><a href="#">Help</a></li>
       </ul>
     </div>
