@@ -47,10 +47,13 @@
             <a href="#" class="forgot-password">Forgot Password?</a>
           </div>
           
-          <a href="../../index.html">
-            <button type="submit" class="submit-btn">Sign Up</button>
-            </a>
+          <div id="passwordError" class="error-message" style="display: none; color: red; margin-bottom: 10px;"></div>
           
+          <button type="submit" id="signupButton" class="submit-btn">
+            <span class="button-text">Sign Up</span>
+            <span class="spinner hidden"></span>
+          </button>	
+
           <div class="login-prompt">
             <p>Already have an account? <a href="../login/index.html">Log in here</a></p>
           </div>
