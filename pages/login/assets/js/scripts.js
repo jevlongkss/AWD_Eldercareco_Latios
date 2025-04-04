@@ -71,7 +71,9 @@ document.addEventListener('DOMContentLoaded', function() {
           window.location.href = `${baseUrl}/pages/crud_admin/index.html`;
         } else {
           console.log('Regular user, redirecting to home page');
-          window.location.href = '../../index.html';
+          // Use absolute path to ensure correct redirection
+          const baseUrl = window.location.href.substring(0, window.location.href.indexOf('/pages/'));
+          window.location.href = `${baseUrl}/pages_login/home/index.html`;
         }
       } else {
         // Login failed
