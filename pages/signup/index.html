@@ -18,7 +18,7 @@
       <div class="form-container">
         <h1>Create an Account</h1>
         <p class="subtitle">Join ElderCare Co. and ensure the best care</p>
-        <form>
+        <form id="signupForm">
           <div class="form-group">
             <label for="name">Name</label>
             <input type="text" id="name" placeholder="Ex. John Jones" required>
@@ -46,13 +46,18 @@
             </div>
             <a href="#" class="forgot-password">Forgot Password?</a>
           </div>
-          <button type="submit" class="submit-btn">Sign Up</button>
+          <div id="passwordError" class="error-message" style="display: none; color: red; margin-bottom: 10px;"></div>
+          <button type="submit" class="submit-btn" id="signupButton">
+            <span class="button-text">Sign Up</span>
+            <span class="spinner hidden">Loading...</span>
+          </button>
           <div class="login-prompt">
-            <p>Already have an account? <a href="#">Log in here</a></p>
+            <p>Already have an account? <a href="../login/index.html">Log in here</a></p>
           </div>
         </form>
       </div>
     </div>
   </div>
+  <script src="./assets/js/scripts.js"></script>
 </body>
 </html>
