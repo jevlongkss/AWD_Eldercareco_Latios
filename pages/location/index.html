@@ -11,35 +11,62 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js" defer></script>
     <link rel="stylesheet" href="/pages/location/assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/header.css">
 </head>
 <body>
-
-<!-- Header -->
-<header>
   <!-- Top Bar -->
   <div class="top-bar">
-      <p>Call +63 2 1234 5678</p>
-      <div class="cta-buttons">
-          <a href="#" class="contact-btn">Contact Us</a>
-          <a href="#" class="location-btn">Find a Location</a>
-      </div>
+    <span>Call +63 2 1234 5678</span>
+    <div class="contact-buttons">
+      <a href="#" class="contact">Contact Us</a>
+      <a href="./pages/location/index.html" class="location">Find a Location</a>
+    </div>
   </div>
-
-  <!-- Main Navigation -->
-  <nav>
-      <img class="logo" src="../../assets/img/logo.png" alt="Eldercare Co. Logo">
-      <ul class="nav-menu">
-          <li><a href="../../index.html">Home</a></li>
-          <li><a href="../aboutus/index.html">About Us</a></li>
-          <li><a href="../crud_client/index.html" aria-current="page">Care Service</a></li>
-          <li><a href="../profile/index.html">Personal Records</a></li>
-      </ul>
-      <a href="../login/index.html" class="browse-plans-btn">Login</a>
+  
+   <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+      <!-- Logo -->
+      <a class="navbar-brand" href="#">
+        <img src="/assets/img/logo.png" alt="Logo" width="100" height="100">
+      </a>
+  
+      <!-- Toggler for mobile view -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+  
+      <!-- Navbar links -->
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="../../index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../aboutus/index.html">About Us</a>
+          </li>
+          <!-- Dropdown -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="../crud_client/index.html" id="careServiceDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Care Service
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="careServiceDropdown">
+              <li><a class="dropdown-item" href="../location/index.html">Location</a></li>
+              <li><a class="dropdown-item" href="../crud_client/index.html">Care Service</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../profile/index.html">Personal Record</a>
+          </li>
+        </ul>
+        <!-- Browse Plans Button -->
+        <a href="../login/index.html" class="btn btn-primary">Login</a>
+      </div>
+    </div>
   </nav>
-</header>
 
 <!-- First Section -->
-<div class="container">
+<div class="container-1">
   <div class="content">
     <h1>Discover the Nearest Healthcare Center for you</h1>
     <p>Find the closest healthcare facilities quickly and effortlessly. Our location feature helps you discover nearby clinics.</p>
