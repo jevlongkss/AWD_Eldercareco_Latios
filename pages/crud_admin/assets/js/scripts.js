@@ -1,6 +1,6 @@
 // API Base URLs
-const API_URL = 'https://demo-api-skills.vercel.app/api/ElderlyCare';
-const APPOINTMENTS_API_URL = `${API_URL}/appointments`;
+const API_URL = 'https://demo-api-skills.vercel.app/api/ElderlyCareCompanion';
+const USERS_API_URL = `${API_URL}/users`;
 
 // Sample initial data (will be replaced with API data)
 let appointments = [
@@ -18,17 +18,17 @@ let appointments = [
 // Fetch appointments from API
 async function fetchAppointments() {
     try {
-        const response = await fetch(APPOINTMENTS_API_URL);
+        const response = await fetch(USERS_API_URL);
         if (!response.ok) throw new Error('Failed to fetch appointments');
         const data = await response.json();
-        appointments = data.map(apt => ({
-            id: apt.id,
-            name: apt.name || '',
-            email: apt.email || '',
-            phone: apt.phone || '',
-            contactPref: apt.contactPref || 'Email',
-            location: apt.location || '',
-            dateOfAppointment: new Date(apt.dateTime).toISOString().split('T')[0]
+        appointments = data.map(user => ({
+            id: user.id,
+            name: user.name || '',
+            email: user.email || '',
+            phone: user.phone || '',
+            contactPref: user.contactPref || 'Email',
+            location: user.location || '',
+            dateOfAppointment: user.dateOfAppointment || new Date().toISOString().split('T')[0]
         }));
         displayAppointments(appointments);
     } catch (error) {
@@ -71,7 +71,7 @@ async function deleteAppointment(id) {
     if (!confirm('Are you sure you want to delete this appointment?')) return;
     
     try {
-        const response = await fetch(`${APPOINTMENTS_API_URL}/${id}`, {
+        const response = await fetch(`${USERS_API_URL}/${id}`, {
             method: 'DELETE',
         });
 
@@ -115,52 +115,87 @@ async function saveAppointment() {
     const form = document.getElementById('appointmentForm');
     const editId = parseInt(form.dataset.editId);
     
-    const appointmentData = {
-        name: document.getElementById('name').value,
-        email: document.getElementById('email').value,
-        phone: document.getElementById('phone').value,
-        contactPref: document.getElementById('contactPref').value,
-        location: document.getElementById('location').value,
-        dateTime: new Date(document.getElementById('dateOfAppointment').value).toISOString()
+    // Get form values
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const password = "Password123!"; // Default password for new users
+    
+    // Validate required fields
+    if (!name || !email || !password) {
+        alert('Name, email, and password are required');
+        return;
+    }
+    
+    // Structure the data according to API requirements
+    const userData = {
+        name: name,
+        email: email,
+        password: password
     };
 
     try {
         if (editId) {
-            // Update existing appointment
-            const response = await fetch(`${APPOINTMENTS_API_URL}/${editId}`, {
+            // Update existing user
+            const response = await fetch(`${USERS_API_URL}/${editId}`, {
                 method: 'PUT',
                 headers: {
-                    'Content-Type': 'application/json',
+                    'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(appointmentData)
+                body: JSON.stringify(userData)
             });
 
-            if (!response.ok) throw new Error('Failed to update appointment');
+            if (!response.ok) {
+                const errorText = await response.text();
+                console.error('Server response:', errorText);
+                throw new Error('Failed to update user');
+            }
             
+            // Get the updated user from the response
+            const updatedUser = await response.json();
+            
+            // Update local data
             const index = appointments.findIndex(a => a.id === editId);
             if (index !== -1) {
                 appointments[index] = { 
                     ...appointments[index], 
-                    ...appointmentData,
+                    name: updatedUser.name,
+                    email: updatedUser.email,
+                    phone: document.getElementById('phone').value,
+                    contactPref: document.getElementById('contactPref').value,
+                    location: document.getElementById('location').value,
                     dateOfAppointment: document.getElementById('dateOfAppointment').value
                 };
             }
         } else {
-            // Create new appointment
-            const response = await fetch(APPOINTMENTS_API_URL, {
+            // Create new user
+            console.log('Sending data:', userData); // Debug log
+            
+            const response = await fetch(USERS_API_URL, {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json',
+                    'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(appointmentData)
+                body: JSON.stringify(userData)
             });
 
-            if (!response.ok) throw new Error('Failed to create appointment');
+            if (!response.ok) {
+                const errorText = await response.text();
+                console.error('Server response:', errorText);
+                throw new Error('Failed to create user');
+            }
+
+            // Get the created user from the response
+            const createdUser = await response.json();
+            console.log('Created user:', createdUser); // Debug log
             
-            const newId = Math.max(...appointments.map(a => a.id), 0) + 1;
+            // Add to local array with proper format
             appointments.push({ 
-                id: newId,
-                ...appointmentData,
+                id: createdUser.id,
+                name: createdUser.name,
+                email: createdUser.email,
+                phone: document.getElementById('phone').value,
+                contactPref: document.getElementById('contactPref').value,
+                location: document.getElementById('location').value,
                 dateOfAppointment: document.getElementById('dateOfAppointment').value
             });
         }
@@ -171,9 +206,12 @@ async function saveAppointment() {
         modal.hide();
         form.reset();
         delete form.dataset.editId;
+
+        // Show success message
+        alert('User saved successfully!');
     } catch (error) {
         console.error('Error:', error);
-        alert(error.message);
+        alert('Failed to save user. Please check the console for details.');
     }
 }
 

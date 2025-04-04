@@ -1,160 +1,81 @@
-// API Client for ElderCare Co.
-const API_BASE_URL = 'https://demo-api-skills.vercel.app/api/ElderlyCare/users';
+const API_BASE_URL = 'https://demo-api-skills.vercel.app/api/ElderlyCareCompanion/users';
+const USERS_API_URL = `${API_BASE_URL}/users`;
 
-class ElderCareAPI {
-    // Create a new user
-    async createUser(userData) {
-        try {
-            const response = await fetch(`${API_BASE_URL}`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(userData),
-            });
+document.addEventListener('DOMContentLoaded', function() {
+  const signupForm = document.getElementById('signupForm');
+  const passwordError = document.getElementById('passwordError');
+  const signupButton = document.getElementById('signupButton');
+  const buttonText = signupButton.querySelector('.button-text');
+  const spinner = signupButton.querySelector('.spinner');
 
-            if (!response.ok) {
-                const error = await response.json();
-                throw new Error(error.message || 'Failed to create user');
-            }
-
-            return await response.json();
-        } catch (error) {
-            console.error('Error creating user:', error);
-            throw error;
+  signupForm.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    
+    // Get form values
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    const confirmPassword = document.getElementById('confirm-password').value;
+    
+    // Validate passwords match
+    if (password !== confirmPassword) {
+      passwordError.textContent = 'Passwords do not match';
+      passwordError.style.display = 'block';
+      return;
+    }
+    
+    // Validate password length
+    if (password.length < 6) {
+      passwordError.textContent = 'Password must be at least 6 characters';
+      passwordError.style.display = 'block';
+      return;
+    }
+    
+    // Hide error message if validation passes
+    passwordError.style.display = 'none';
+    
+    // Show loading state
+    buttonText.textContent = 'Signing up...';
+    spinner.classList.remove('hidden');
+    signupButton.disabled = true;
+    
+    try {
+      // Send data to API
+      const response = await fetch(API_BASE_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name,
+          email,
+          password
+        })
+      });
+      
+      const data = await response.json();
+      
+      if (response.ok) {
+        // Successful signup
+        alert('Account created successfully!');
+        // Redirect to login page
+        window.location.href = '../login/index.html';
+      } else {
+        // Handle error
+        if (data.error === 'User already exists') {
+          alert('An account with this email already exists. Please log in or use a different email.');
+        } else {
+          alert(data.error || 'Failed to create account. Please try again.');
         }
+      }
+    } catch (error) {
+      console.error('Error during signup:', error);
+      alert('An error occurred during signup. Please try again later.');
+    } finally {
+      // Reset button state
+      buttonText.textContent = 'Sign Up';
+      spinner.classList.add('hidden');
+      signupButton.disabled = false;
     }
-
-    // Get all users
-    async getUsers() {
-        try {
-            const response = await fetch(`${API_BASE_URL}`, {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            });
-
-            if (!response.ok) {
-                throw new Error('Failed to fetch users');
-            }
-
-            return await response.json();
-        } catch (error) {
-            console.error('Error fetching users:', error);
-            throw error;
-        }
-    }
-
-    // Login user
-    async login(credentials) {
-        try {
-            const response = await fetch(`${API_BASE_URL}/auth/login`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(credentials),
-            });
-
-            if (!response.ok) {
-                const error = await response.json();
-                throw new Error(error.message || 'Login failed');
-            }
-
-            return await response.json();
-        } catch (error) {
-            console.error('Error logging in:', error);
-            throw error;
-        }
-    }
-}
-
-// Export the API client
-const elderCareAPI = new ElderCareAPI();
-
-// Signup Form Handling
-document.addEventListener('DOMContentLoaded', () => {
-    const signupForm = document.getElementById('signupForm');
-    const signupButton = document.getElementById('signupButton');
-    const passwordError = document.getElementById('passwordError');
-
-    if (signupForm) {
-        signupForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            
-            // Show loading state
-            signupButton.disabled = true;
-            const buttonText = signupButton.querySelector('.button-text');
-            const spinner = signupButton.querySelector('.spinner');
-            buttonText.classList.add('hidden');
-            spinner.classList.remove('hidden');
-
-            try {
-                // Get form values
-                const name = document.getElementById('name').value;
-                const phone = document.getElementById('phone').value;
-                const email = document.getElementById('email').value;
-                const password = document.getElementById('password').value;
-                const confirmPassword = document.getElementById('confirmPassword').value;
-                const agreeToTerms = document.getElementById('remember').checked;
-
-                // Validate form
-                if (!agreeToTerms) {
-                    throw new Error('Please agree to the Terms & Conditions');
-                }
-
-                if (password !== confirmPassword) {
-                    throw new Error('Passwords do not match');
-                }
-
-                if (password.length < 6) {
-                    throw new Error('Password must be at least 6 characters long');
-                }
-
-                // Create user data object
-                const userData = {
-                    name,
-                    email,
-                    password,
-                    phone: phone || undefined // Only include phone if it's provided
-                };
-
-                // Create new API instance and send request
-                const api = new ElderCareAPI();
-                const response = await api.createUser(userData);
-                
-                // Store the authentication token if provided
-                if (response.token) {
-                    localStorage.setItem('authToken', response.token);
-                }
-
-                // Redirect to dashboard or home page
-                window.location.href = '/dashboard';
-            } catch (error) {
-                console.error('Signup error:', error);
-                if (passwordError) {
-                    passwordError.textContent = error.message;
-                    passwordError.style.display = 'block';
-                }
-            } finally {
-                // Reset loading state
-                signupButton.disabled = false;
-                buttonText.classList.remove('hidden');
-                spinner.classList.add('hidden');
-            }
-        });
-    }
+  });
 });
-
-export default elderCareAPI;
-
-fetch(API_URL)
-  .then((response) => {
-    if (!response.ok) {
-      throw new Error("API connection failed");
-    }
-    return response.json();
-  })
-  .then((data) => console.log("API connected successfully:", data))
-  .catch((error) => console.error("Error connecting to API:", error));

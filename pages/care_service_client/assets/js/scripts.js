@@ -1,256 +1,167 @@
 // API Client for ElderCare Co.
-const API_BASE_URL = 'https://demo-api-skills.vercel.app/api/ElderlyCare/appointments';
+const API_BASE_URL = 'https://demo-api-skills.vercel.app/api/ElderlyCareCompanion';
 
-class ElderCareAPI {
-    // Create Appointment
-    async createAppointment(appointmentData) {
-        try {
-            const response = await fetch(API_BASE_URL, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(appointmentData),
-            });
+document.addEventListener('DOMContentLoaded', function() {
+  // Check authentication status immediately
+  const checkAuth = async () => {
+    try {
+      const user = JSON.parse(localStorage.getItem('user'));
+      if (!user || !user.email) {
+        window.location.href = '../login/index.html';
+        return null;
+      }
 
-            if (!response.ok) {
-                throw new Error('Failed to create appointment');
-            }
+      // Fetch all users to get the correct ID
+      const response = await fetch(`${API_BASE_URL}/users`);
+      const users = await response.json();
+      
+      // Find the user with matching email
+      const matchingUser = users.find(u => u.email === user.email);
+      
+      if (!matchingUser) {
+        console.error('User not found in the database');
+        window.location.href = '../login/index.html';
+        return null;
+      }
 
-            const text = await response.text();
-            if (!text) {
-                throw new Error('Empty response from server');
-            }
+      console.log('Found user:', matchingUser); // Debug log
+      return matchingUser;
+    } catch (error) {
+      console.error('Error in checkAuth:', error);
+      return null;
+    }
+  };
 
-            try {
-                return JSON.parse(text);
-            } catch (e) {
-                console.error('Failed to parse JSON:', text);
-                throw new Error('Invalid response format from server');
-            }
-        } catch (error) {
-            console.error('Error creating appointment:', error);
-            throw error;
+  // Get the form element
+  const appointmentForm = document.querySelector('.care-form');
+  const submitButton = appointmentForm.querySelector('.submit-btn');
+
+  // Add event listener for form submission
+  appointmentForm.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    
+    // Get form values
+    const name = document.getElementById('name').value;
+    const phone = document.getElementById('phone').value;
+    const email = document.getElementById('email').value;
+    const contactPreference = document.querySelector('input[name="contact"]:checked')?.value || 'email';
+    const location = document.getElementById('location').value;
+    const date = document.getElementById('date').value;
+    const additionalInfo = document.getElementById('additional-info').value;
+    
+    // Validate required fields
+    if (!name || !phone || !email || !date) {
+      alert('Please fill in all required fields');
+      return;
+    }
+    
+    try {
+      // Show loading state
+      submitButton.textContent = 'Submitting...';
+      submitButton.disabled = true;
+
+      // Get current user and verify authentication
+      const user = await checkAuth();
+      if (!user) {
+        alert('Please log in to create an appointment');
+        window.location.href = '../login/index.html';
+        return;
+      }
+
+      console.log('Creating appointment for user:', user.id); // Debug log
+      
+      // Prepare appointment data
+      const appointmentData = {
+        userId: user.id,
+        type: 'visiting',
+        title: `Appointment for ${name}`,
+        dateTime: new Date(date).toISOString(),
+        location: location,
+        medicationDetails: additionalInfo || null
+      };
+
+      console.log('Sending appointment data:', appointmentData); // Debug log
+      
+      // Send data to API
+      const response = await fetch(`${API_BASE_URL}/appointments`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(appointmentData)
+      });
+      
+      const data = await response.json();
+      console.log('API Response:', data); // Debug log
+      
+      if (response.ok) {
+        // Successful appointment creation
+        alert('Appointment created successfully!');
+        // Reset form
+        appointmentForm.reset();
+      } else {
+        // Handle error
+        throw new Error(data.error || 'Failed to create appointment');
+      }
+    } catch (error) {
+      console.error('Error creating appointment:', error);
+      alert(error.message || 'An error occurred while creating the appointment. Please try again later.');
+    } finally {
+      // Reset button state
+      submitButton.textContent = 'SUBMIT';
+      submitButton.disabled = false;
+    }
+  });
+  
+  // Function to fetch and display appointments
+  async function fetchAppointments() {
+    try {
+      // Get current user and verify authentication
+      const user = await checkAuth();
+      if (!user) return;
+
+      console.log('Fetching appointments for user:', user.id); // Debug log
+      
+      // Fetch appointments for the current user
+      const response = await fetch(`${API_BASE_URL}/appointments?userId=${encodeURIComponent(user.id)}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
         }
-    }
-
-    // Get All Appointments
-    async getAppointments(userId) {
-        try {
-            const response = await fetch(`${API_BASE_URL}?userId=${userId}`);
-            
-            if (!response.ok) {
-                throw new Error('Failed to fetch appointments');
-            }
-
-            const text = await response.text();
-            if (!text) {
-                throw new Error('Empty response from server');
-            }
-
-            try {
-                return JSON.parse(text);
-            } catch (e) {
-                console.error('Failed to parse JSON:', text);
-                throw new Error('Invalid response format from server');
-            }
-        } catch (error) {
-            console.error('Error fetching appointments:', error);
-            throw error;
+      });
+      
+      const appointments = await response.json();
+      console.log('Fetched appointments:', appointments); // Debug log
+      
+      if (response.ok) {
+        // Display appointments if there's a container for them
+        const appointmentsContainer = document.getElementById('appointments-list');
+        if (appointmentsContainer) {
+          if (appointments.length === 0) {
+            appointmentsContainer.innerHTML = '<p>No appointments found.</p>';
+          } else {
+            appointmentsContainer.innerHTML = appointments.map(appointment => `
+              <div class="appointment-card">
+                <h3>${appointment.title}</h3>
+                <p><strong>Date:</strong> ${new Date(appointment.dateTime).toLocaleDateString()}</p>
+                <p><strong>Location:</strong> ${appointment.location}</p>
+                ${appointment.medicationDetails ? `<p><strong>Additional Info:</strong> ${appointment.medicationDetails}</p>` : ''}
+              </div>
+            `).join('');
+          }
         }
+      } else {
+        throw new Error(appointments.error || 'Failed to fetch appointments');
+      }
+    } catch (error) {
+      console.error('Error fetching appointments:', error);
     }
-
-    // Schedule Reminder
-    async scheduleReminder(appointmentId, reminderData) {
-        try {
-            const response = await fetch(`${API_BASE_URL}/${appointmentId}/reminder`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(reminderData),
-            });
-
-            if (!response.ok) {
-                throw new Error('Failed to schedule reminder');
-            }
-
-            return await response.json();
-        } catch (error) {
-            console.error('Error scheduling reminder:', error);
-            throw error;
-        }
+  }
+  
+  // Initial auth check and fetch appointments
+  checkAuth().then(user => {
+    if (user && document.getElementById('appointments-list')) {
+      fetchAppointments();
     }
-}
-
-// Export the API client
-const elderCareAPI = new ElderCareAPI();
-
-// Appointment Form Handling
-document.addEventListener('DOMContentLoaded', () => {
-    const appointmentForm = document.getElementById('appointmentForm');
-    const submitButton = document.getElementById('submitButton');
-    const appointmentError = document.getElementById('appointmentError');
-    const typeSelect = document.getElementById('type');
-    const medicationDetailsGroup = document.getElementById('medicationDetailsGroup');
-    const reminderGroup = document.getElementById('reminderGroup');
-
-    // Show/hide medication details based on appointment type
-    if (typeSelect) {
-        typeSelect.addEventListener('change', (e) => {
-            if (medicationDetailsGroup) {
-                medicationDetailsGroup.style.display = 
-                    e.target.value === 'medication' ? 'block' : 'none';
-            }
-        });
-    }
-
-    // Show/hide reminder options
-    if (reminderGroup) {
-        reminderGroup.style.display = 'block';
-    }
-
-    if (appointmentForm) {
-        appointmentForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            
-            // Clear previous errors
-            if (appointmentError) {
-                appointmentError.textContent = '';
-                appointmentError.style.display = 'none';
-            }
-            
-            // Show loading state
-            if (submitButton) {
-                const buttonText = submitButton.querySelector('.button-text');
-                const spinner = submitButton.querySelector('.spinner');
-                submitButton.disabled = true;
-                if (buttonText) buttonText.classList.add('hidden');
-                if (spinner) spinner.classList.remove('hidden');
-            }
-
-            try {
-                // Get form values
-                const title = document.getElementById('title').value;
-                const type = document.getElementById('type').value;
-                const dateTime = document.getElementById('dateTime').value;
-                const location = document.getElementById('location').value;
-                const medicationDetails = document.getElementById('medicationDetails')?.value;
-                
-                // Get reminder preferences
-                const reminderEnabled = document.getElementById('reminderEnabled')?.checked;
-                const reminderType = document.getElementById('reminderType')?.value;
-                const reminderTime = document.getElementById('reminderTime')?.value;
-
-                // Get userId from localStorage (assuming it was stored during login)
-                const userData = JSON.parse(localStorage.getItem('userData') || '{}');
-                const userId = userData.id;
-
-                if (!userId) {
-                    throw new Error('User not logged in');
-                }
-
-                // Create appointment data object
-                const appointmentData = {
-                    userId,
-                    type,
-                    title,
-                    dateTime: new Date(dateTime).toISOString(),
-                    location: location || undefined,
-                    medicationDetails: type === 'medication' ? medicationDetails : undefined,
-                    reminder: reminderEnabled ? {
-                        type: reminderType,
-                        time: reminderTime
-                    } : undefined
-                };
-
-                // Send to API
-                const response = await elderCareAPI.createAppointment(appointmentData);
-                console.log('Appointment created:', response);
-
-                // If reminder is enabled, schedule it
-                if (reminderEnabled && response.id) {
-                    const reminderData = {
-                        type: reminderType,
-                        time: reminderTime,
-                        appointmentId: response.id,
-                        userId: userId
-                    };
-                    await elderCareAPI.scheduleReminder(response.id, reminderData);
-                }
-
-                // Clear form
-                appointmentForm.reset();
-
-                // Update appointments list if it exists
-                await updateAppointmentsList();
-
-                // Show success message
-                if (appointmentError) {
-                    appointmentError.textContent = 'Appointment created successfully!';
-                    appointmentError.style.display = 'block';
-                    appointmentError.style.color = 'green';
-                }
-            } catch (error) {
-                console.error('Appointment creation error:', error);
-                if (appointmentError) {
-                    appointmentError.textContent = error.message || 'Failed to create appointment. Please try again.';
-                    appointmentError.style.display = 'block';
-                    appointmentError.style.color = 'red';
-                }
-            } finally {
-                // Reset loading state
-                if (submitButton) {
-                    const buttonText = submitButton.querySelector('.button-text');
-                    const spinner = submitButton.querySelector('.spinner');
-                    submitButton.disabled = false;
-                    if (buttonText) buttonText.classList.remove('hidden');
-                    if (spinner) spinner.classList.add('hidden');
-                }
-            }
-        });
-    }
-
-    // Function to update appointments list
-    async function updateAppointmentsList() {
-        const appointmentsList = document.getElementById('appointmentsList');
-        if (!appointmentsList) return;
-
-        try {
-            const userData = JSON.parse(localStorage.getItem('userData') || '{}');
-            const userId = userData.id;
-
-            if (!userId) {
-                throw new Error('User not logged in');
-            }
-
-            const appointments = await elderCareAPI.getAppointments(userId);
-            
-            // Clear current list
-            appointmentsList.innerHTML = '';
-
-            // Add appointments to list
-            appointments.forEach(appointment => {
-                const appointmentElement = document.createElement('div');
-                appointmentElement.className = 'appointment-item';
-                appointmentElement.innerHTML = `
-                    <h3>${appointment.title}</h3>
-                    <p>Type: ${appointment.type}</p>
-                    <p>Date: ${new Date(appointment.dateTime).toLocaleString()}</p>
-                    ${appointment.location ? `<p>Location: ${appointment.location}</p>` : ''}
-                    ${appointment.medicationDetails ? `<p>Medication Details: ${appointment.medicationDetails}</p>` : ''}
-                    ${appointment.reminder ? `
-                        <p>Reminder: ${appointment.reminder.type === 'email' ? 'Email' : 'SMS'} 
-                        ${appointment.reminder.time} before appointment</p>
-                    ` : ''}
-                `;
-                appointmentsList.appendChild(appointmentElement);
-            });
-        } catch (error) {
-            console.error('Error updating appointments list:', error);
-        }
-    }
-
-    // Initial load of appointments
-    updateAppointmentsList();
+  });
 });
