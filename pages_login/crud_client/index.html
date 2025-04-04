@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ElderCare Co.</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" defer></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js" defer></script>
+    <link rel="stylesheet" href="/pages/crud_client/assets/css/style.css">
+    <link rel="stylesheet" href="../../assets/css/header.css">
+</head>
+<body>
+
+<!-- Top Bar -->
+<div class="top-bar">
+  <span>Call +63 2 1234 5678</span>
+  <div class="contact-buttons">
+    <a href="#" class="contact">Contact Us</a>
+    <a href="../location/index.html" class="location">Find a Location</a>
+  </div>
+</div>
+
+ <!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container">
+    <!-- Logo -->
+    <a class="navbar-brand" href="#">
+      <img src="/assets/img/logo.png" alt="Logo" width="100" height="100">
+    </a>
+
+    <!-- Toggler for mobile view -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Navbar links -->
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="../../index.html">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="../aboutus/index.html">About Us</a>
+        </li>
+        <!-- Dropdown -->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="../crud_client/index.html" id="careServiceDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Care Service
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="careServiceDropdown">
+            <li><a class="dropdown-item" href="../location/index.html">Location</a></li>
+            <li><a class="dropdown-item" href="../crud_client/index.html">Care Service</a></li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="../profile/index.html">Personal Record</a>
+        </li>
+      </ul>
+      <!-- Browse Plans Button -->
+      <a href="../profile/index.html" class="btn btn-primary">Profile</a>
+    </div>
+  </div>
+</nav>
+
+<!-- First Section  -->
+<section class="section">
+  <div class="content">
+    <h1>Find One of the Best Senior Home Care Services.</h1>
+    <p>Tell us where care is needed for your loved ones.</p>
+    <div class="form-group">
+      <label for="state">States</label>
+      <select id="state">
+        <option value="" disabled selected>State where care is needed</option>
+        <option value="california">California</option>
+        <option value="texas">Texas</option>
+        <option value="florida">Florida</option>
+        <option value="new_york">New York</option>
+      </select>
+      <a href="../care_service_client/index.html">
+      <button type="button">Search For Care</button>
+      </a>
+    </div>
+  </div>
+  <div class="image">
+    <img src="./img/image-1-10.png" alt="Senior Home Care">
+  </div>
+</section>
+
+<!-- Second Section -->
+<section class="section-alt">
+  <div class="image">
+    <img src="./img/pexels-kampus-7551646-10.png" alt="Elderly Assistance">
+  </div>
+  <div class="content">
+    <h1>ElderCare Co. Your Trusted Partner in Quality Home Care</h1>
+    <p><strong>Seeking dependable and compassionate home care services for your loved one?</strong></p>
+    <p>
+      At ElderCare Co., we deliver personalized care solutions designed to meet the unique needs of every senior. Whether it’s assistance with daily routines or meaningful companionship, our dedicated caregivers provide support right in the comfort of home ensuring peace of mind for you and a better quality of life for your loved one.
+    </p>
+    <p>
+      Enter your city, state, or ZIP code to connect with a local ElderCare Co. provider and discover how we can make a difference in your family’s life.
+    </p>
+  </div>
+</section>
+
+<!-- Third Section -->
+
+<section class="care-section">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-6 content1">
+        <h1>Personalized Home Care with a Local Touch</h1>
+        <p>At ElderCare Co., we take pride in being locally owned and deeply connected to the communities we serve. Our team works closely with you to provide personalized, one-on-one support throughout the entire caregiving journey.</p>
+        <p>When you reach out to your local ElderCare Co. office, we'll schedule a free, no-obligation consultation. During this meeting, our care coordinator will take the time to understand your loved one's unique needs, craft a customized care plan, and answer any questions you may have about our in-home senior care services.</p>
+        <p>Take the first step toward compassionate, tailored care – contact your local ElderCare Co. office today for a free consultation!</p>
+      </div>
+      <div class="col-lg-6 right-section">
+        <div class="image-placeholder">
+          <div class="placeholder-box">
+            <img src="./img/freepik-upload-59628-20.png">
+          </div>
+        </div>
+        <a href="../location/index.html" class="locations-cta">View our available Locations</a>
+      </div>
+    </div>
+  </div>
+</section>
+  
+<!-- footer -->
+  <section class="newsletter">
+    <div class="newsletter-content">
+      <div>
+        <b><h2>Want more? Enter Email Address to Subscribe</h2></b>
+        <p>Receive tips and advice on caregiving for your loved one.</p>
+      </div>
+      <div>
+        <form>
+          <input type="email" placeholder="Enter Email Address" required />
+          <button type="submit">Subscribe</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+<footer>
+  <div class="footer-content">
+    <div class="footer-section">
+      <h3>ELDERCARE CO.</h3>
+      <p>provides compassionate, personalized companionship and care to seniors.</p>
+    </div>
+    <div class="footer-section">
+      <h3>NAVIGATION</h3>
+      <ul>
+        <li><a href="../../index.html">Home</a></li>
+        <li><a href="../aboutus/index.html">About Us</a></li>
+        <li><a href="../crud_client/index.html">Care service</a></li>
+        <li><a href="../profile/index.html">Personal Record</a></li>
+      </ul>
+    </div>
+    <div class="footer-section">
+      <h3>USEFUL LINKS</h3>
+      <ul>
+        <li><a href="../profile/index.html">Your Account</a></li>
+        <li><a href="#">Become one of Us</a></li>
+        <li><a href="../location/index.html">Find Location</a></li>
+        <li><a href="#">Help</a></li>
+      </ul>
+    </div>
+    <div class="footer-section">
+      <h3>CONTACT</h3>
+      <address>
+        Vespucci Beach, San Andreas bay<br />
+        <a href="mailto:Franklin@gmail.com">Franklin@gmail.com</a><br />
+        <a href="tel:+15551234567">(555) 123-4567</a><br />
+        <a href="tel:+11234567890">(123) 456-7890</a>
+      </address>
+    </div>
+  </div>
+</footer>
+<div class="copyright">
+  <p>&copy; Copyright 2025 inc.</p>
+</div>
+
+</body>
+</html>
