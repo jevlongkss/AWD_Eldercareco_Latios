@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ElderCare Co.</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" defer></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js" defer></script>
+    <link rel="stylesheet" href="/pages/location/assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/header.css">
+</head>
+<body>
+  <!-- Top Bar -->
+  <div class="top-bar">
+    <span>Call +63 2 1234 5678</span>
+    <div class="contact-buttons">
+      <a href="#" class="contact">Contact Us</a>
+      <a href="./pages/location/index.html" class="location">Find a Location</a>
+    </div>
+  </div>
+  
+   <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+      <!-- Logo -->
+      <a class="navbar-brand" href="#">
+        <img src="/assets/img/logo.png" alt="Logo" width="100" height="100">
+      </a>
+  
+      <!-- Toggler for mobile view -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+  
+      <!-- Navbar links -->
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="../../index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../aboutus/index.html">About Us</a>
+          </li>
+          <!-- Dropdown -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="../crud_client/index.html" id="careServiceDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Care Service
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="careServiceDropdown">
+              <li><a class="dropdown-item" href="../location/index.html">Location</a></li>
+              <li><a class="dropdown-item" href="../crud_client/index.html">Care Service</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../profile/index.html">Personal Record</a>
+          </li>
+        </ul>
+        <!-- Browse Plans Button -->
+        <a href="../profile/index.html" class="btn btn-primary">Profile</a>
+      </div>
+    </div>
+  </nav>
+
+<!-- First Section -->
+<div class="container-1">
+  <div class="content">
+    <h1>Discover the Nearest Healthcare Center for you</h1>
+    <p>Find the closest healthcare facilities quickly and effortlessly. Our location feature helps you discover nearby clinics.</p>
+    <a href="#" class="explore-btn">Explore Locations</a>
+  </div>
+  <div class="images">
+    <img src="/pages/location/assets/img/HC1.png" alt="Healthcare Center 1">
+    <img src="/pages/location/assets/img/HC2.png" alt="Healthcare Center 2">
+    <img src="/pages/location/assets/img/HC3.png" alt="Healthcare Center 3">
+    <img src="/pages/location/assets/img/HC4.png" alt="Healthcare Center 4">
+  </div>
+</div>
+
+<!-- Second Section -->
+<div class="clinics-section">
+  <div class="clinics-header">
+    <h2>Browse our Clinics</h2>
+    <a href="#" class="browse-btn">Browse all clinics</a>
+  </div>
+  <div class="clinic-cards">
+    <div class="clinic-card">
+      <img src="./assets/img/istockphoto-157677909-612x612 1.png" alt="New York Clinic">
+      <div class="clinic-card-content">
+        <h3>New York, NY</h3>
+        <p>Trusted eldercare with access to top medical services.</p>
+        <span class="arrow">&rarr;</span>
+      </div>
+    </div>
+    <div class="clinic-card">
+      <img src="./assets/img/istockphoto-155433479-612x612 1.png" alt="London Clinic">
+      <div class="clinic-card-content">
+        <h3>London, UK</h3>
+        <p>Personalized eldercare near leading healthcare.</p>
+        <span class="arrow">&rarr;</span>
+      </div>
+    </div>
+    <div class="clinic-card">
+      <img src="./assets/img/istockphoto-183238251-612x612 1.png" alt="Manila Clinic">
+      <div class="clinic-card-content">
+        <h3>Manila, PH</h3>
+        <p>Quality eldercare with local health support.</p>
+        <span class="arrow">&rarr;</span>
+      </div>
+    </div>
+    <div class="clinic-card">
+      <img src="./assets/img/HC1.png" alt="Chicago Clinic">
+      <div class="clinic-card-content">
+        <h3>Chicago, IL</h3>
+        <p>Reliable eldercare in top-tier medical centers.</p>
+        <span class="arrow">&rarr;</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- containter -->
+
+<div class="container1">
+  <h1>Our Service</h1>
+  <div class="services">
+      <div class="service-card">
+          <img src="/pages/location/assets/img/OF.png" alt="Our Facility">
+          <h3>Our Facility</h3>
+          <p>ElderCare Co. features 84 private rooms within a 9,000 m² senior community, thoughtfully designed to provide comfort, security, and a welcoming environment.</p>
+      </div>
+      <div class="service-card">
+          <img src="/pages/location/assets/img/OR.png" alt="Our Rooms">
+          <h3>Our Rooms</h3>
+          <p>Each of our cozy, well-appointed rooms can be personalized by residents to create a familiar and comfortable living space.</p>
+      </div>
+      <div class="service-card">
+          <img src="/pages/location/assets/img/OD.png" alt="Our Dining">
+          <h3>Our Dining</h3>
+          <p>We believe that nutrition and enjoyment go hand in hand, offering delicious, well-balanced meals to support the health and happiness of our residents.</p>
+      </div>
+      <div class="service-card">
+          <img src="/pages/location/assets/img/OE.png" alt="Our Events">
+          <h3>Our Events</h3>
+          <p>From engaging activities to special events, we foster a vibrant community that encourages social interaction, mental stimulation, and overall well-being.</p>
+      </div>
+  </div>
+</div>
+
+  <section class="newsletter">
+    <div class="newsletter-content">
+      <div>
+        <b><h2>Want more? Enter Email Address to Subscribe</h2></b>
+        <p>Receive tips and advice on caregiving for your loved one.</p>
+      </div>
+      <div>
+        <form>
+          <input type="email" placeholder="Enter Email Address" required />
+          <button type="submit">Subscribe</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+<footer>
+  <div class="footer-content">
+    <div class="footer-section">
+      <h3>ELDERCARE CO.</h3>
+      <p>provides compassionate, personalized companionship and care to seniors.</p>
+    </div>
+    <div class="footer-section">
+      <h3>NAVIGATION</h3>
+      <ul>
+        <li><a href="../../index.html">Home</a></li>
+        <li><a href="../aboutus/index.html">About Us</a></li>
+        <li><a href="../crud_client/index.html">Care service</a></li>
+        <li><a href="../profile/index.html">Personal Record</a></li>
+      </ul>
+    </div>
+    <div class="footer-section">
+      <h3>USEFUL LINKS</h3>
+      <ul>
+        <li><a href="../profile/index.html">Your Account</a></li>
+        <li><a href="#">Become one of Us</a></li>
+        <li><a href="../location/index.html">Find Location</a></li>
+        <li><a href="#">Help</a></li>
+      </ul>
+    </div>
+    <div class="footer-section">
+      <h3>CONTACT</h3>
+      <address>
+        Vespucci Beach, San Andreas bay<br />
+        <a href="mailto:Franklin@gmail.com">Franklin@gmail.com</a><br />
+        <a href="tel:+15551234567">(555) 123-4567</a><br />
+        <a href="tel:+11234567890">(123) 456-7890</a>
+      </address>
+    </div>
+  </div>
+</footer>
+<div class="copyright">
+  <p>&copy; Copyright 2025 inc.</p>
+</div>
+
+</body>
+</html>

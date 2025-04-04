@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Care Service - Eldercare Co.</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./assets/css/style.css">
+</head>
+<body>
+    <header>
+      <div class="top-bar">
+        <p>Call +63 2 1234 5678</p>
+        <div class="cta-buttons">
+          <a href="#" class="contact-btn">Contact Us</a>
+          <a href="../location/index.html" class="location-btn">Find a Location</a>
+        </div>
+      </div>
+      <nav>
+        <img class="logo" src="./assets/img/logo2.png" alt="Elderly Care Companion Logo">
+        <ul class="nav-menu">
+          <li><a href="../../index.html">Home</a></li>
+          <li><a href="../aboutus/index.html">About Us</a></li>
+          <li><a href="../crud_client/index.html" aria-current="page" aria-haspopup="true">Care Service ▾</a></li>
+          <li><a href="../profile/index.html">Personal Records</a></li>
+        </ul>
+        <a href="../profile/index.html" class="browse-plans-btn">Profile</a>
+      </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-content">
+                <h2>Visiting Elderly Companion</h2>
+                <h1>Eldercare Co.</h1>
+                <p>Begin your journey with Eldercare Co., where compassionate care meets your loved one's unique needs.</p>
+                <a href="#appointment-form" class="cta-button">Elderly Care Service</a>
+            </div>
+        </section>
+
+        <!-- Appointment Form Section -->
+        <section id="appointment-form" class="appointment-section">
+            <div class="form-container">
+                <h2>Visiting Eldercare Co.</h2>
+                <h3>Get Started with Elderly Care</h3>
+                
+                <form class="care-form">
+                    <div class="form-columns">
+                        <div class="form-column">
+                            <div class="form-group">
+                                <label for="name">Name*</label>
+                                <input type="text" id="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Phone*</label>
+                                <input type="tel" id="phone" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email*</label>
+                                <input type="email" id="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Your Contact Preference:</label>
+                                <div class="contact-preference">
+                                    <label>
+                                        <input type="radio" name="contact" value="email"> Email
+                                    </label>
+                                    <label>
+                                        <input type="radio" name="contact" value="phone"> Phone
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-column">
+                            <div class="form-group">
+                                <label for="location">Location?</label>
+                                <select id="location">
+                                    <option value="manila">Manila, PH</option>
+                                    <option value="quezon">Quezon City, PH</option>
+                                    <option value="makati">Makati, PH</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="date">Date?</label>
+                                <input type="date" id="date">
+                            </div>
+                            <div class="form-group">
+                                <label for="additional-info">Additional Information</label>
+                                <textarea id="additional-info" rows="4"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="submit-btn">SUBMIT</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Newsletter Section -->
+        <div class="newsletter-wrapper">
+            <div class="newsletter">
+                <div class="newsletter-content">
+                    <div class="newsletter-text">
+                        <h2>Want more Enter Email Address to Subscribe</h2>
+                        <p>Receive tips and advice on caregiving for your loved one.</p>
+                    </div>
+                    <div class="newsletter-form">
+                        <input type="email" placeholder="Enter Email Address">
+                        <button type="submit">Subscribe</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>ELDERCARE CO.</h3>
+                <p>provides compassionate, personalized companionship and care to seniors.</p>
+            </div>
+            <div class="footer-section">
+                <h3>NAVIGATION</h3>
+                <ul>
+                    <li><a href="../../index.html">Home</a></li>
+                    <li><a href="../aboutus/index.html">About Us</a></li>
+                    <li><a href="../crud_client/index.html">Care service</a></li>
+                    <li><a href="../profile/index.html">Personal Record</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>USEFUL LINKS</h3>
+                <ul>
+                    <li><a href="../profile/index.html">Your Account</a></li>
+                    <li><a href="#">Become one of Us</a></li>
+                    <li><a href="../location/index.html">Find Location</a></li>
+                    <li><a href="#">Help</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>CONTACT</h3>
+                <address>
+                    Vespucci Beach, San Andreas bay<br />
+                    <a href="mailto:Franklin@gmail.com">Franklin@gmail.com</a><br />
+                    <a href="tel:+15551234567">(555) 123-4567</a><br />
+                    <a href="tel:+11234567890">(123) 456-7890</a>
+                </address>
+            </div>
+        </div>
+    </footer>
+    <div class="copyright">
+        <p>&copy; Copyright 2025 inc.</p>
+    </div>
+</body>
+</html>
