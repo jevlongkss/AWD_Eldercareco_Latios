@@ -17,7 +17,7 @@
 
 <!-- TODO: Change the zyx-0314 into your github username  -->
 <!-- TODO: Change the WD-Template-Project into the same name of your folder -->
-![](https://visit-counter.vercel.app/counter.png?page=zyx-0314/WD-Template-Project)
+![](https://visit-counter.vercel.app/counter.png?page=jevlongkss/AWD_Eldercareco_Latios)
 
 [![wakatime](https://wakatime.com/badge/user/018dd99a-4985-4f98-8216-6ca6fe2ce0f8/project/63501637-9a31-42f0-960d-4d0ab47977f8.svg)](https://wakatime.com/badge/user/018dd99a-4985-4f98-8216-6ca6fe2ce0f8/project/63501637-9a31-42f0-960d-4d0ab47977f8)
 
@@ -93,37 +93,140 @@ Guiding Questions:
 ```
 ┣ 📂assets
 ┃ ┣ 📂css
+┃ ┃ ┣ 📜header.css
 ┃ ┃ ┗ 📜style.css
 ┃ ┣ 📂img
-┃ ┃ ┗ 📜nyebe_white.png
+┃ ┃ ┣ 📜freepik__upload__63441 1.png
+┃ ┃ ┣ 📜logo.png
+┃ ┃ ┣ 📜medication.jpg
+┃ ┃ ┣ 📜Service1.png
+┃ ┃ ┣ 📜Service2.png
+┃ ┃ ┗ 📜Service3.png
 ┃ ┗ 📂js
 ┃   ┗ 📜script.js
 ┣ 📂Design
-┃ ┗ 📂v1
-┃   ┣ 📜About_Us.png
-┃   ┣ 📜Hero_Page.png
-┃   ┣ 📜LOGO.png
-┃   ┣ 📜Main_Page.png
-┃   ┗ 📜V1.pdf
+┃ ┣ 📂v1
+┃ ┃ ┣ 📜About_Us.png
+┃ ┃ ┣ 📜Hero_Page.png
+┃ ┃ ┣ 📜LOGO.png
+┃ ┃ ┣ 📜Main_Page.png
+┃ ┃ ┗ 📜V1.pdf
+┃ ┣ 📂v2
+┃ ┃ ┣ 📜Account_Creation-LOGIN.png
+┃ ┃ ┣ 📜Account_Creation-SIGNIN.png
+┃ ┃ ┣ 📜Care_Service_CLIENT.png
+┃ ┃ ┣ 📜Care_Service_CLIENT2.png
+┃ ┃ ┣ 📜Care_Service_CRUD-ADMIN.png
+┃ ┃ ┣ 📜Location.png
+┃ ┃ ┣ 📜Personal_Record.png
+┃ ┃ ┗ 📜Updated_Main_Page.png
+┃ ┗ 📂V3
+┃   ┣ 📜Account_Creation_LOGIN.png
+┃   ┣ 📜Account_Creation_SIGNIN.png
+┃   ┣ 📜CRUD_ADMIN.png
+┃   ┣ 📜CRUD_CLIENT.png
+┃   ┣ 📜CRUD_CLIENT2.png
+┃   ┣ 📜Location.png
+┃   ┣ 📜Mobile Login.png
+┃   ┣ 📜Mobile Sign In.png
+┃   ┣ 📜Personal_Record.png
+┃   ┗ 📜Updated_Main_Page.png
+┣ 📂Documentation
+┃ ┗ 📜development plan.md
 ┣ 📂pages
-┃ ┣ 📂page1
+┃ ┣ 📂aboutus
 ┃ ┃ ┣ 📂assets
 ┃ ┃ ┃ ┣ 📂css
 ┃ ┃ ┃ ┃ ┗ 📜style.css
+┃ ┃ ┃ ┣ 📂img
+┃ ┃ ┃ ┃ ┣ 📜groupphoto.png
+┃ ┃ ┃ ┃ ┣ 📜hero_background.png
+┃ ┃ ┃ ┃ ┣ 📜hero_bg.png
+┃ ┃ ┃ ┃ ┣ 📜line-7.svg
+┃ ┃ ┃ ┃ ┣ 📜logo1.png
+┃ ┃ ┃ ┃ ┣ 📜logo2.png
+┃ ┃ ┃ ┃ ┣ 📜mission.png
+┃ ┃ ┃ ┃ ┣ 📜rectangle-23.svg
+┃ ┃ ┃ ┃ ┗ 📜vission.png
 ┃ ┃ ┃ ┗ 📂js
 ┃ ┃ ┃   ┗ 📜scripts.js
 ┃ ┃ ┗ 📜index.html
-┃ ┣ 📂page2
+┃ ┣ 📂care_service_client
 ┃ ┃ ┣ 📂assets
 ┃ ┃ ┃ ┣ 📂css
 ┃ ┃ ┃ ┃ ┗ 📜style.css
+┃ ┃ ┃ ┣ 📂img
+┃ ┃ ┃ ┃ ┣ 📜admin-avatar.png
+┃ ┃ ┃ ┃ ┣ 📜hands-logo.svg
+┃ ┃ ┃ ┃ ┣ 📜logo1.png
+┃ ┃ ┃ ┃ ┣ 📜logo2.png
+┃ ┃ ┃ ┃ ┣ 📜logo2.svg
+┃ ┃ ┃ ┃ ┣ 📜profile-icon.svg
+┃ ┃ ┃ ┃ ┗ 📜service_client_bg.png
 ┃ ┃ ┃ ┗ 📂js
 ┃ ┃ ┃   ┗ 📜scripts.js
 ┃ ┃ ┗ 📜index.html
-┃ ┗ 📂page3
+┃ ┣ 📂crud_admin
+┃ ┃ ┣ 📂assets
+┃ ┃ ┃ ┣ 📂css
+┃ ┃ ┃ ┃ ┗ 📜style.css
+┃ ┃ ┃ ┣ 📂img
+┃ ┃ ┃ ┃ ┣ 📜admin-avatar.png
+┃ ┃ ┃ ┃ ┣ 📜logo1.png
+┃ ┃ ┃ ┃ ┗ 📜logo2.png
+┃ ┃ ┃ ┗ 📂js
+┃ ┃ ┃   ┗ 📜scripts.js
+┃ ┃ ┗ 📜index.html
+┃ ┣ 📂crud_client
+┃ ┃ ┣ 📂assets
+┃ ┃ ┃ ┗ 📂css
+┃ ┃ ┃   ┗ 📜style.css
+┃ ┃ ┣ 📂img
+┃ ┃ ┃ ┣ 📜freepik-upload-59628-20.png
+┃ ┃ ┃ ┣ 📜image-1-10.png
+┃ ┃ ┃ ┗ 📜pexels-kampus-7551646-10.png
+┃ ┃ ┗ 📜index.html
+┃ ┣ 📂location
+┃ ┃ ┣ 📂assets
+┃ ┃ ┃ ┣ 📂css
+┃ ┃ ┃ ┃ ┗ 📜style.css
+┃ ┃ ┃ ┣ 📂img
+┃ ┃ ┃ ┃ ┣ 📜HC1.png
+┃ ┃ ┃ ┃ ┣ 📜HC2.png
+┃ ┃ ┃ ┃ ┣ 📜HC3.png
+┃ ┃ ┃ ┃ ┣ 📜HC4.png
+┃ ┃ ┃ ┃ ┣ 📜istockphoto-155433479-612x612 1.png
+┃ ┃ ┃ ┃ ┣ 📜istockphoto-157677909-612x612 1.png
+┃ ┃ ┃ ┃ ┣ 📜istockphoto-183238251-612x612 1.png
+┃ ┃ ┃ ┃ ┣ 📜OD.png
+┃ ┃ ┃ ┃ ┣ 📜OE.png
+┃ ┃ ┃ ┃ ┣ 📜OF.png
+┃ ┃ ┃ ┃ ┗ 📜OR.png
+┃ ┃ ┃ ┗ 📂js
+┃ ┃ ┃   ┗ 📜scripts.js
+┃ ┃ ┗ 📜index.html
+┃ ┣ 📂login
+┃ ┃ ┣ 📂assets
+┃ ┃ ┃ ┣ 📂css
+┃ ┃ ┃ ┃ ┗ 📜style.css
+┃ ┃ ┃ ┣ 📂img
+┃ ┃ ┃ ┃ ┣ 📜Login_image.png
+┃ ┃ ┃ ┃ ┗ 📜logo.png
+┃ ┃ ┃ ┗ 📂js
+┃ ┃ ┃   ┗ 📜scripts.js
+┃ ┃ ┗ 📜index.html
+┃ ┣ 📂profile
+┃ ┃ ┣ 📂assets
+┃ ┃ ┃ ┗ 📂css
+┃ ┃ ┃   ┗ 📜style.css
+┃ ┃ ┗ 📜index.html
+┃ ┗ 📂signup
 ┃   ┣ 📂assets
 ┃   ┃ ┣ 📂css
 ┃   ┃ ┃ ┗ 📜style.css
+┃   ┃ ┣ 📂img
+┃   ┃ ┃ ┣ 📜logo.png
+┃   ┃ ┃ ┗ 📜signin_image.png
 ┃   ┃ ┗ 📂js
 ┃   ┃   ┗ 📜scripts.js
 ┃   ┗ 📜index.html
@@ -131,6 +234,7 @@ Guiding Questions:
 ┣ 📜index.html
 ┣ 📜LICENSE
 ┗ 📜readme.md
+
 ```
 
 ## Resources
