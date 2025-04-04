@@ -1,4 +1,6 @@
-const API_BASE_URL = 'https://demo-api-skills.vercel.app/api/ElderlyCareCompanion/users';
+// API URLs
+const API_BASE_URL = 'https://demo-api-skills.vercel.app/api/ElderlyCareCompanion';
+const USERS_API_URL = `${API_BASE_URL}/users`;
 
 document.addEventListener('DOMContentLoaded', function() {
   const loginForm = document.getElementById('loginForm');
@@ -11,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function() {
     e.preventDefault();
     
     // Get form values
-    const email = document.getElementById('email').value;
+    const email = document.getElementById('email').value.trim();
     const password = document.getElementById('password').value;
     
     // Validate required fields
@@ -30,50 +32,57 @@ document.addEventListener('DOMContentLoaded', function() {
     loginButton.disabled = true;
     
     try {
-      // First, get all users to find the one with matching email
-      const response = await fetch(API_BASE_URL, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        }
-      });
+      console.log('Fetching users from:', USERS_API_URL);
+      
+      // First, get all users
+      const response = await fetch(USERS_API_URL);
+      console.log('API Response status:', response.status);
+      
+      if (!response.ok) {
+        throw new Error(`Failed to fetch users (Status: ${response.status})`);
+      }
       
       const users = await response.json();
+      console.log('Found', users.length, 'users');
       
-      if (response.ok) {
-        // Find user with matching email
-        const user = users.find(user => user.email === email);
+      // Find user with matching email and password
+      const user = users.find(u => u.email === email && u.password === password);
+      console.log('User found:', user ? 'Yes' : 'No');
+      
+      if (user) {
+        // Store user info in localStorage
+        const userData = {
+          id: user.id,
+          name: user.name,
+          email: user.email
+        };
         
-        if (user) {
-          // User found, verify password
-          if (user.password === password) {
-            // Password matches, login successful
-            alert('Login successful!');
-            // Store user info in session/local storage if needed
-            localStorage.setItem('user', JSON.stringify({
-              id: user.id,
-              name: user.name,
-              email: user.email
-            }));
-            // Redirect to home page or dashboard
-            window.location.href = '../../index.html';
-          } else {
-            // Password doesn't match
-            passwordError.textContent = 'Invalid email or password';
-            passwordError.style.display = 'block';
-          }
+        console.log('Storing user data:', userData);
+        localStorage.setItem('user', JSON.stringify(userData));
+        
+        // Show success message
+        alert('Login successful!');
+        
+        // Redirect based on user type
+        if (email === 'admin@admin.com') {
+          console.log('Admin user detected, redirecting to admin page');
+          // Use absolute path to ensure correct redirection
+          const baseUrl = window.location.href.substring(0, window.location.href.indexOf('/pages/'));
+          window.location.href = `${baseUrl}/pages/crud_admin/index.html`;
         } else {
-          // User not found
-          passwordError.textContent = 'Invalid email or password';
-          passwordError.style.display = 'block';
+          console.log('Regular user, redirecting to home page');
+          window.location.href = '../../index.html';
         }
       } else {
-        // API error
-        alert(users.error || 'Failed to login. Please try again.');
+        // Login failed
+        console.log('Login failed: Invalid credentials');
+        passwordError.textContent = 'Invalid email or password';
+        passwordError.style.display = 'block';
       }
     } catch (error) {
       console.error('Error during login:', error);
-      alert('An error occurred during login. Please try again later.');
+      passwordError.textContent = 'An error occurred during login. Please try again later.';
+      passwordError.style.display = 'block';
     } finally {
       // Reset button state
       buttonText.textContent = 'Login';
