@@ -57,6 +57,12 @@ Start
 [Homepage]
   |
   v
+[Log In] --> Access personalized features and manage account
+  |
+  v
+[Sign Up] --> Create a new account to access services
+  |
+  v
 [About Us] --> Learn about the company’s mission, team, and story
   |
   v
