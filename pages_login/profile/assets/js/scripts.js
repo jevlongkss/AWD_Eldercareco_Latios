@@ -22,29 +22,60 @@ function getCurrentUser() {
     }
 }
 
+// Function to get appointment API URL for the current user
+function getCurrentUserAppointmentApiUrl() {
+    const user = getCurrentUser();
+    if (!user || !user.id) {
+        console.error('No user ID found in localStorage');
+        return null;
+    }
+    
+    return `${USERS_API_URL}/${user.id}/appointment`;
+}
+
+// Helper function to make HTTP requests
+function makeRequest(url, method, data = null) {
+    return new Promise((resolve, reject) => {
+        const xhr = new XMLHttpRequest();
+        xhr.open(method, url, true);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        
+        xhr.onload = function() {
+            if (xhr.status >= 200 && xhr.status < 300) {
+                try {
+                    const response = JSON.parse(xhr.responseText);
+                    resolve(response);
+                } catch (e) {
+                    resolve(xhr.responseText);
+                }
+            } else {
+                reject(new Error(`Request failed with status ${xhr.status}: ${xhr.statusText}`));
+            }
+        };
+        
+        xhr.onerror = function() {
+            reject(new Error('Request failed'));
+        };
+        
+        if (data) {
+            xhr.send(JSON.stringify(data));
+        } else {
+            xhr.send();
+        }
+    });
+}
+
 // Function to fetch appointments for the current user
 async function fetchAppointments() {
-    const user = getCurrentUser();
-    if (!user) {
+    const appointmentApiUrl = getCurrentUserAppointmentApiUrl();
+    if (!appointmentApiUrl) {
         throw new Error('User not authenticated');
     }
 
     try {
-        const response = await fetch(`${APPOINTMENTS_API_URL}/get`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                userId: String(user.id)
-            })
-        });
-
-        if (!response.ok) {
-            throw new Error(`Failed to fetch appointments (Status: ${response.status})`);
-        }
-
-        const appointments = await response.json();
+        console.log('Fetching appointments from:', appointmentApiUrl);
+        const appointments = await makeRequest(appointmentApiUrl, 'GET');
+        console.log('Fetched appointments:', appointments);
         return appointments;
     } catch (error) {
         console.error('Error fetching appointments:', error);
@@ -54,51 +85,76 @@ async function fetchAppointments() {
 
 // Function to get a single appointment
 async function getAppointment(appointmentId) {
-  try {
-    console.log('Fetching appointment:', appointmentId);
-    const response = await fetch(`${APPOINTMENTS_API_URL}/${appointmentId}`);
-    console.log('Response status:', response.status);
-    
-    if (!response.ok) {
-      const errorText = await response.text();
-      console.error('API Error Response:', errorText);
-      throw new Error(`Failed to fetch appointment (Status: ${response.status}): ${errorText}`);
+    try {
+        const appointmentApiUrl = getCurrentUserAppointmentApiUrl();
+        if (!appointmentApiUrl) {
+            throw new Error('User not authenticated');
+        }
+        
+        console.log('Fetching appointment:', appointmentId);
+        const appointment = await makeRequest(`${appointmentApiUrl}/${appointmentId}`, 'GET');
+        console.log('Fetched appointment:', appointment);
+        return appointment;
+    } catch (error) {
+        console.error('Error fetching appointment:', error);
+        throw error;
+    }
+}
+
+// Function to create a new appointment
+async function createAppointment(appointmentData) {
+    const appointmentApiUrl = getCurrentUserAppointmentApiUrl();
+    if (!appointmentApiUrl) {
+        throw new Error('User not authenticated');
     }
     
-    const appointment = await response.json();
-    console.log('Fetched appointment:', appointment);
-    return appointment;
-  } catch (error) {
-    console.error('Error fetching appointment:', error);
-    throw error;
-  }
+    // Convert all values to strings
+    const stringData = {
+        type: String(appointmentData.type),
+        title: String(appointmentData.title),
+        dateTime: String(appointmentData.dateTime),
+        location: String(appointmentData.location),
+        medicationDetails: String(appointmentData.medicationDetails),
+        status: String(appointmentData.status)
+    };
+    
+    console.log('Creating appointment with data:', stringData);
+    console.log('Using API URL:', appointmentApiUrl);
+    
+    try {
+        const response = await makeRequest(appointmentApiUrl, 'POST', stringData);
+        console.log('Appointment creation response:', response);
+        return response;
+    } catch (error) {
+        console.error('Error creating appointment:', error);
+        throw error;
+    }
 }
 
 // Function to update an appointment
 async function updateAppointment(appointmentId, appointmentData) {
     try {
-        const response = await fetch(`${APPOINTMENTS_API_URL}/update`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                id: String(appointmentId),
-                userId: String(appointmentData.userId),
-                type: appointmentData.type,
-                title: appointmentData.title,
-                dateTime: appointmentData.dateTime,
-                location: appointmentData.location,
-                medicationDetails: appointmentData.medicationDetails,
-                status: appointmentData.status
-            })
-        });
-
-        if (!response.ok) {
-            throw new Error(`Failed to update appointment (Status: ${response.status})`);
+        const appointmentApiUrl = getCurrentUserAppointmentApiUrl();
+        if (!appointmentApiUrl) {
+            throw new Error('User not authenticated');
         }
-
-        return await response.json();
+        
+        // Convert all values to strings
+        const stringData = {
+            type: String(appointmentData.type),
+            title: String(appointmentData.title),
+            dateTime: String(appointmentData.dateTime),
+            location: String(appointmentData.location),
+            medicationDetails: String(appointmentData.medicationDetails),
+            status: String(appointmentData.status)
+        };
+        
+        console.log('Updating appointment:', appointmentId);
+        console.log('Update data:', stringData);
+        
+        const response = await makeRequest(`${appointmentApiUrl}/${appointmentId}`, 'PUT', stringData);
+        console.log('Appointment update response:', response);
+        return response;
     } catch (error) {
         console.error('Error updating appointment:', error);
         throw error;
@@ -108,20 +164,14 @@ async function updateAppointment(appointmentId, appointmentData) {
 // Function to delete an appointment
 async function deleteAppointment(appointmentId) {
     try {
-        const response = await fetch(`${APPOINTMENTS_API_URL}/delete`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                id: String(appointmentId)
-            })
-        });
-
-        if (!response.ok) {
-            throw new Error(`Failed to delete appointment (Status: ${response.status})`);
+        const appointmentApiUrl = getCurrentUserAppointmentApiUrl();
+        if (!appointmentApiUrl) {
+            throw new Error('User not authenticated');
         }
-
+        
+        console.log('Deleting appointment:', appointmentId);
+        await makeRequest(`${appointmentApiUrl}/${appointmentId}`, 'DELETE');
+        console.log('Appointment deleted successfully');
         return true;
     } catch (error) {
         console.error('Error deleting appointment:', error);
@@ -216,21 +266,7 @@ function displayAppointments(appointments) {
 // Function to open edit modal
 async function openEditModal(appointmentId) {
     try {
-        const response = await fetch(`${APPOINTMENTS_API_URL}/get`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                id: String(appointmentId)
-            })
-        });
-
-        if (!response.ok) {
-            throw new Error(`Failed to fetch appointment (Status: ${response.status})`);
-        }
-
-        const appointment = await response.json();
+        const appointment = await getAppointment(appointmentId);
         
         // Extract contact info from medicationDetails string
         let phone = '', email = '', contactPref = 'Email';
@@ -350,7 +386,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 const user = getCurrentUser();
                 const appointmentPayload = {
-                    userId: String(user.id),
                     type: "Care Service",
                     title: `Care Service Appointment - ${formData.name}`,
                     dateTime: new Date(formData.date).toISOString(),
@@ -366,18 +401,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     alert('Appointment updated successfully!');
                 } else {
                     // Create new appointment
-                    const response = await fetch(`${APPOINTMENTS_API_URL}/create`, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify(appointmentPayload)
-                    });
-
-                    if (!response.ok) {
-                        throw new Error(`Failed to create appointment (Status: ${response.status})`);
-                    }
-
+                    await createAppointment(appointmentPayload);
                     alert('Appointment created successfully!');
                 }
 
