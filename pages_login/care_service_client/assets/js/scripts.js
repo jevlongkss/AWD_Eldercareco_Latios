@@ -1,7 +1,7 @@
 // API URLs
 const API_BASE_URL = 'https://demo-api-skills.vercel.app/api/ElderlyCareCompanion';
 const USERS_API_URL = `${API_BASE_URL}/users`;
-const APPOINTMENTS_API_URL = `${API_BASE_URL}/appointment`;
+const APPOINTMENTS_API_URL = `${API_BASE_URL}/appointments`;
 
 // Function to get current user
 function getCurrentUser() {
